@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     langsmith_project: str = "quantedge"
     macro_cache_ttl_hours: float = 24.0
 
-    database_url: str = "postgresql://localhost:5432/quantedge"
+    database_url: str = ""
     redis_url: str = "redis://localhost:6379/0"
 
     zmq_host: str = "127.0.0.1"
