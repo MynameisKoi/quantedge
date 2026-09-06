@@ -1,0 +1,1763 @@
+[
+  {
+    "timestamp": "2026-09-06T01:00:46.924647+00:00",
+    "agent_name": "quantedge_usoil_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for USOIL LONG at 89.33",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "USOIL",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON growth dynamics support industrial energy consumption."
+        },
+        {
+          "agent": "usoil_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.68,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.35) aligns with LONG execution. Catalysts: Risk-on sentiment and geopolitical tensions (U.S.-Iran flare-up) support crude, though price consolidation near technical resistance suggests cautious optimism. OPEC+ discipline and stable inventories provide underlying support."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Risk-on regime reduces real rate headwinds; lower USD DXY supports commodities. However, persistent inflation concerns may limit upside if central banks signal hawkish shifts. | Global growth momentum supports energy demand. Naira appreciation signals emerging market FX stability, reducing currency hedging costs for oil importers and supporting marginal buyer interest."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 89.33 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T01:00:47.360763+00:00",
+    "agent_name": "quantedge_usoil_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for USOIL LONG at 89.33",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "USOIL",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON growth dynamics support industrial energy consumption."
+        },
+        {
+          "agent": "usoil_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.68,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.35) aligns with LONG execution. Catalysts: Risk-on sentiment and geopolitical tensions (U.S.-Iran flare-up) support crude, though price consolidation near technical resistance suggests cautious optimism. OPEC+ discipline and stable inventories provide underlying support."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Risk-on regime reduces real rate headwinds; lower USD DXY supports commodities. However, persistent inflation concerns may limit upside if central banks signal hawkish shifts. | Global growth momentum supports energy demand. Naira appreciation signals emerging market FX stability, reducing currency hedging costs for oil importers and supporting marginal buyer interest."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 89.33 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T01:01:46.881901+00:00",
+    "agent_name": "quantedge_usoil_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for USOIL LONG at 89.33",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "USOIL",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON growth dynamics support industrial energy consumption."
+        },
+        {
+          "agent": "usoil_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.68,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.35) aligns with LONG execution. Catalysts: Risk-on sentiment and geopolitical tensions (U.S.-Iran flare-up) support crude, though price consolidation near technical resistance suggests cautious optimism. OPEC+ discipline and stable inventories provide underlying support."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Risk-on regime reduces real rate headwinds; lower USD DXY supports commodities. However, persistent inflation concerns may limit upside if central banks signal hawkish shifts. | Global growth momentum supports energy demand. Naira appreciation signals emerging market FX stability, reducing currency hedging costs for oil importers and supporting marginal buyer interest."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 89.33 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T01:01:46.900640+00:00",
+    "agent_name": "quantedge_usoil_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for USOIL LONG at 89.33",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "USOIL",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON growth dynamics support industrial energy consumption."
+        },
+        {
+          "agent": "usoil_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.68,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.35) aligns with LONG execution. Catalysts: Risk-on sentiment and geopolitical tensions (U.S.-Iran flare-up) support crude, though price consolidation near technical resistance suggests cautious optimism. OPEC+ discipline and stable inventories provide underlying support."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Risk-on regime reduces real rate headwinds; lower USD DXY supports commodities. However, persistent inflation concerns may limit upside if central banks signal hawkish shifts. | Global growth momentum supports energy demand. Naira appreciation signals emerging market FX stability, reducing currency hedging costs for oil importers and supporting marginal buyer interest."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 89.33 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T01:01:47.443173+00:00",
+    "agent_name": "quantedge_usoil_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for USOIL LONG at 89.33",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "USOIL",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON growth dynamics support industrial energy consumption."
+        },
+        {
+          "agent": "usoil_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.68,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.35) aligns with LONG execution. Catalysts: Risk-on sentiment and geopolitical tensions (U.S.-Iran flare-up) support crude, though price consolidation near technical resistance suggests cautious optimism. OPEC+ discipline and stable inventories provide underlying support."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Risk-on regime reduces real rate headwinds; lower USD DXY supports commodities. However, persistent inflation concerns may limit upside if central banks signal hawkish shifts. | Global growth momentum supports energy demand. Naira appreciation signals emerging market FX stability, reducing currency hedging costs for oil importers and supporting marginal buyer interest."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 89.33 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:03:31.197971+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79400.0",
+    "response_text": "AGENTS DEBATING (3/5 Agreed): Pending approval from btcusd_macro_specialist, LiquidityAgent.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": false,
+      "agreed_count": 3,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": false,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 dissents: Asset stance is BULLISH (+0.25), conflicting with SHORT entry."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": false,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79400.00 (Trend: bearish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:03:31.205837+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79750.0",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-OFF liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: BEARISH -0.45). Catalysts: Institutional risk-off de-risking and liquidation cascade observed."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79750.00 (Trend: bearish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.2R, TP at +4.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:03:31.211818+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD LONG at 82100.0",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON risk appetite drives digital asset inflows."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.55) aligns with LONG execution. Catalysts: Massive institutional spot ETF inflows announced."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 82100.00 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.2R, TP at +4.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:44.204533+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79400.0",
+    "response_text": "AGENTS DEBATING (3/5 Agreed): Pending approval from btcusd_macro_specialist, LiquidityAgent.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": false,
+      "agreed_count": 3,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": false,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 dissents: Asset stance is BULLISH (+0.25), conflicting with SHORT entry."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": false,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79400.00 (Trend: bearish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:44.216819+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79750.0",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-OFF liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: BEARISH -0.45). Catalysts: Institutional risk-off de-risking and liquidation cascade observed."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79750.00 (Trend: bearish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.2R, TP at +4.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:44.223590+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD LONG at 82100.0",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON risk appetite drives digital asset inflows."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.55) aligns with LONG execution. Catalysts: Massive institutional spot ETF inflows announced."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 82100.00 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.2R, TP at +4.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:51.476208+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD LONG at 79912.76",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON risk appetite drives digital asset inflows."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance NEUTRAL (+0.15) aligns with LONG execution. Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79912.76 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:51.477788+00:00",
+    "agent_name": "quantedge_order_decision_agent",
+    "provider": "autonomous_agent",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Order Decision & Dispatch Protocol for MT4",
+    "user_prompt": "Fire order for BTCUSD LONG",
+    "response_text": "Order Decision Agent approved LONG BTCUSD (BTCUSDm) at 79922.76. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.03 lots (1% equity risk = $4.37 on $436.67 equity). Risk controls: S/L=79753.63 (-169.13), T/P=80261.02 (+338.26), B/E trigger=80091.89.",
+    "parsed_json": {
+      "ticket": "999101",
+      "order": {
+        "approved": true,
+        "asset": "BTCUSD",
+        "symbol": "BTCUSDm",
+        "canonical_symbol": "BTCUSD",
+        "side": "long",
+        "order_cmd": "buy",
+        "volume": 0.03,
+        "price": 79922.76,
+        "stop_loss": 79753.63,
+        "take_profit": 80261.02,
+        "breakeven_trigger": 80091.89,
+        "stop_distance": 169.13,
+        "risk_amount": 4.37,
+        "equity": 436.67,
+        "score": 65.0,
+        "threshold": 65.0,
+        "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+        "strategy_archetype": "value_pullback",
+        "rationale": "Order Decision Agent approved LONG BTCUSD (BTCUSDm) at 79922.76. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.03 lots (1% equity risk = $4.37 on $436.67 equity). Risk controls: S/L=79753.63 (-169.13), T/P=80261.02 (+338.26), B/E trigger=80091.89.",
+        "timestamp": "2026-09-06T03:04:51.477165+00:00"
+      },
+      "bridge_reply": {
+        "status": "submitted",
+        "bridge": {
+          "ok": true,
+          "ticket": 999101,
+          "payload": {
+            "ticket": 999101,
+            "price": 79800.0
+          }
+        }
+      }
+    },
+    "latency_ms": 25.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:51.494855+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79912.76",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: NEUTRAL +0.15). Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79912.76 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:51.497876+00:00",
+    "agent_name": "quantedge_order_decision_agent",
+    "provider": "autonomous_agent",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Order Decision & Dispatch Protocol for MT4",
+    "user_prompt": "Fire order for BTCUSD SHORT",
+    "response_text": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 79912.76. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.03 lots (1% equity risk = $4.37 on $436.67 equity). Risk controls: S/L=80081.89 (-169.13), T/P=79574.50 (+338.26), B/E trigger=79743.63.",
+    "parsed_json": {
+      "ticket": "999102",
+      "order": {
+        "approved": true,
+        "asset": "BTCUSD",
+        "symbol": "BTCUSDm",
+        "canonical_symbol": "BTCUSD",
+        "side": "short",
+        "order_cmd": "sell",
+        "volume": 0.03,
+        "price": 79912.76,
+        "stop_loss": 80081.89,
+        "take_profit": 79574.5,
+        "breakeven_trigger": 79743.63,
+        "stop_distance": 169.13,
+        "risk_amount": 4.37,
+        "equity": 436.67,
+        "score": 65.0,
+        "threshold": 65.0,
+        "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+        "strategy_archetype": "value_pullback",
+        "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 79912.76. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.03 lots (1% equity risk = $4.37 on $436.67 equity). Risk controls: S/L=80081.89 (-169.13), T/P=79574.50 (+338.26), B/E trigger=79743.63.",
+        "timestamp": "2026-09-06T03:04:51.497020+00:00"
+      },
+      "bridge_reply": {
+        "status": "submitted",
+        "bridge": {
+          "ok": true,
+          "ticket": 999102,
+          "payload": {
+            "ticket": 999102,
+            "price": 79800.0
+          }
+        }
+      }
+    },
+    "latency_ms": 25.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:51.521700+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79912.76",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: NEUTRAL +0.15). Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79912.76 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:51.524204+00:00",
+    "agent_name": "quantedge_order_decision_agent",
+    "provider": "autonomous_agent",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Order Decision & Dispatch Protocol for MT4",
+    "user_prompt": "Fire order for BTCUSD SHORT",
+    "response_text": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 79912.76. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.03 lots (1% equity risk = $4.37 on $436.67 equity). Risk controls: S/L=80081.89 (-169.13), T/P=79574.50 (+338.26), B/E trigger=79743.63.",
+    "parsed_json": {
+      "ticket": "999103",
+      "order": {
+        "approved": true,
+        "asset": "BTCUSD",
+        "symbol": "BTCUSDm",
+        "canonical_symbol": "BTCUSD",
+        "side": "short",
+        "order_cmd": "sell",
+        "volume": 0.03,
+        "price": 79912.76,
+        "stop_loss": 80081.89,
+        "take_profit": 79574.5,
+        "breakeven_trigger": 79743.63,
+        "stop_distance": 169.13,
+        "risk_amount": 4.37,
+        "equity": 436.67,
+        "score": 65.0,
+        "threshold": 65.0,
+        "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+        "strategy_archetype": "value_pullback",
+        "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 79912.76. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.03 lots (1% equity risk = $4.37 on $436.67 equity). Risk controls: S/L=80081.89 (-169.13), T/P=79574.50 (+338.26), B/E trigger=79743.63.",
+        "timestamp": "2026-09-06T03:04:51.522650+00:00"
+      },
+      "bridge_reply": {
+        "status": "submitted",
+        "bridge": {
+          "ok": true,
+          "ticket": 999103,
+          "payload": {
+            "ticket": 999103,
+            "price": 79800.0
+          }
+        }
+      }
+    },
+    "latency_ms": 25.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T03:04:51.537868+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79912.76",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: NEUTRAL +0.15). Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79912.76 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:02.801091+00:00",
+    "agent_name": "btcusd_macro_analyst",
+    "provider": "anthropic",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "You are the btcusd_macro_analyst for QuantEdge AI.\nRole: Institutional Digital Assets & Macro Liquidity Strategist. Analyze global risk appetite, Federal Reserve balance sheet expansion, institutional spot ETF flows, and crypto macro beta.\nYour objective is to evaluate recent news headlines, global macro regime, and market conditions specifically for BTCUSD.\nRespond ONLY with a valid JSON object containing exactly these keys:\n{\n  \"bias\": float (-1.0 to 1.0, where >0 is bullish, <0 is bearish, 0 is neutral),\n  \"stance\": \"BULLISH\" | \"BEARISH\" | \"NEUTRAL\",\n  \"confidence\": float (0.0 to 1.0),\n  \"summary\": \"Concise 1-2 sentence institutional macroeconomic summary for this asset.\",\n  \"quant_impact\": \"Actionable instructions for the quantitative technical engine (e.g. favor trend pullbacks, breakout confirmation, etc.)\",\n  \"multi_agent_perspectives\": {\n    \"monetary_policy\": \"Interest rate & central bank policy impact on this asset\",\n    \"growth_liquidity\": \"Economic growth & liquidity cycle impact on this asset\",\n    \"asset_fundamentals\": \"Specific supply, demand, inventory, or flow drivers\"\n  },\n  \"key_catalysts\": [\"catalyst 1\", \"catalyst 2\"]\n}",
+    "user_prompt": "{\"asset\": \"BTCUSD\", \"global_regime\": \"risk-on\", \"regime_summary\": \"\", \"headlines\": [\"Bitcoin spot ETFs record massive inflows\"], \"live_stats\": {}}",
+    "response_text": "{\"bias\": 0.6, \"stance\": \"BULLISH\", \"confidence\": 0.85, \"summary\": \"Institutional ETF inflows accelerate\", \"quant_impact\": \"Favor momentum breakouts above EMA20\", \"multi_agent_perspectives\": {\"monetary_policy\": \"loose\", \"growth_liquidity\": \"expanding\"}, \"key_catalysts\": [\"ETF net inflows\"]}",
+    "parsed_json": {
+      "bias": 0.6,
+      "stance": "BULLISH",
+      "confidence": 0.85,
+      "summary": "Institutional ETF inflows accelerate",
+      "quant_impact": "Favor momentum breakouts above EMA20",
+      "multi_agent_perspectives": {
+        "monetary_policy": "loose",
+        "growth_liquidity": "expanding"
+      },
+      "key_catalysts": [
+        "ETF net inflows"
+      ]
+    },
+    "latency_ms": 0.55,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:05.300610+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD LONG at 80081.37",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON risk appetite drives digital asset inflows."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance NEUTRAL (+0.15) aligns with LONG execution. Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 80081.37 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:05.303508+00:00",
+    "agent_name": "quantedge_order_decision_agent",
+    "provider": "autonomous_agent",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Order Decision & Dispatch Protocol for MT4",
+    "user_prompt": "Fire order for BTCUSD LONG",
+    "response_text": "Order Decision Agent approved LONG BTCUSD (BTCUSDm) at 80091.37. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.02 lots (1% equity risk = $4.36 on $436.37 equity). Risk controls: S/L=79899.22 (-192.15), T/P=80475.67 (+384.30), B/E trigger=80283.52.",
+    "parsed_json": {
+      "ticket": "999101",
+      "order": {
+        "approved": true,
+        "asset": "BTCUSD",
+        "symbol": "BTCUSDm",
+        "canonical_symbol": "BTCUSD",
+        "side": "long",
+        "order_cmd": "buy",
+        "volume": 0.02,
+        "price": 80091.37,
+        "stop_loss": 79899.22,
+        "take_profit": 80475.67,
+        "breakeven_trigger": 80283.52,
+        "stop_distance": 192.15,
+        "risk_amount": 4.36,
+        "equity": 436.37,
+        "score": 65.0,
+        "threshold": 65.0,
+        "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+        "strategy_archetype": "value_pullback",
+        "rationale": "Order Decision Agent approved LONG BTCUSD (BTCUSDm) at 80091.37. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.02 lots (1% equity risk = $4.36 on $436.37 equity). Risk controls: S/L=79899.22 (-192.15), T/P=80475.67 (+384.30), B/E trigger=80283.52.",
+        "timestamp": "2026-09-06T05:42:05.302573+00:00"
+      },
+      "bridge_reply": {
+        "status": "submitted",
+        "bridge": {
+          "ok": true,
+          "ticket": 999101,
+          "payload": {
+            "ticket": 999101,
+            "price": 79800.0
+          }
+        }
+      }
+    },
+    "latency_ms": 25.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:05.317767+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 80081.37",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: NEUTRAL +0.15). Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 80081.37 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:05.320311+00:00",
+    "agent_name": "quantedge_order_decision_agent",
+    "provider": "autonomous_agent",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Order Decision & Dispatch Protocol for MT4",
+    "user_prompt": "Fire order for BTCUSD SHORT",
+    "response_text": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 80081.37. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.02 lots (1% equity risk = $4.36 on $436.37 equity). Risk controls: S/L=80273.52 (-192.15), T/P=79697.07 (+384.30), B/E trigger=79889.22.",
+    "parsed_json": {
+      "ticket": "999102",
+      "order": {
+        "approved": true,
+        "asset": "BTCUSD",
+        "symbol": "BTCUSDm",
+        "canonical_symbol": "BTCUSD",
+        "side": "short",
+        "order_cmd": "sell",
+        "volume": 0.02,
+        "price": 80081.37,
+        "stop_loss": 80273.52,
+        "take_profit": 79697.07,
+        "breakeven_trigger": 79889.22,
+        "stop_distance": 192.15,
+        "risk_amount": 4.36,
+        "equity": 436.37,
+        "score": 65.0,
+        "threshold": 65.0,
+        "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+        "strategy_archetype": "value_pullback",
+        "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 80081.37. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.02 lots (1% equity risk = $4.36 on $436.37 equity). Risk controls: S/L=80273.52 (-192.15), T/P=79697.07 (+384.30), B/E trigger=79889.22.",
+        "timestamp": "2026-09-06T05:42:05.319459+00:00"
+      },
+      "bridge_reply": {
+        "status": "submitted",
+        "bridge": {
+          "ok": true,
+          "ticket": 999102,
+          "payload": {
+            "ticket": 999102,
+            "price": 79800.0
+          }
+        }
+      }
+    },
+    "latency_ms": 25.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:05.340345+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 80081.37",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: NEUTRAL +0.15). Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 80081.37 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:05.342701+00:00",
+    "agent_name": "quantedge_order_decision_agent",
+    "provider": "autonomous_agent",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Order Decision & Dispatch Protocol for MT4",
+    "user_prompt": "Fire order for BTCUSD SHORT",
+    "response_text": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 80081.37. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.02 lots (1% equity risk = $4.36 on $436.37 equity). Risk controls: S/L=80273.52 (-192.15), T/P=79697.07 (+384.30), B/E trigger=79889.22.",
+    "parsed_json": {
+      "ticket": "999103",
+      "order": {
+        "approved": true,
+        "asset": "BTCUSD",
+        "symbol": "BTCUSDm",
+        "canonical_symbol": "BTCUSD",
+        "side": "short",
+        "order_cmd": "sell",
+        "volume": 0.02,
+        "price": 80081.37,
+        "stop_loss": 80273.52,
+        "take_profit": 79697.07,
+        "breakeven_trigger": 79889.22,
+        "stop_distance": 192.15,
+        "risk_amount": 4.36,
+        "equity": 436.37,
+        "score": 65.0,
+        "threshold": 65.0,
+        "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+        "strategy_archetype": "value_pullback",
+        "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 80081.37. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 65.0/65). Size: 0.02 lots (1% equity risk = $4.36 on $436.37 equity). Risk controls: S/L=80273.52 (-192.15), T/P=79697.07 (+384.30), B/E trigger=79889.22.",
+        "timestamp": "2026-09-06T05:42:05.341926+00:00"
+      },
+      "bridge_reply": {
+        "status": "submitted",
+        "bridge": {
+          "ok": true,
+          "ticket": 999103,
+          "payload": {
+            "ticket": 999103,
+            "price": 79800.0
+          }
+        }
+      }
+    },
+    "latency_ms": 25.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:05.356327+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 80081.37",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.58,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: NEUTRAL +0.15). Catalysts: Bitcoin faces near-term headwinds from stronger-than-expected labor data puncturing the 80K ceiling, but a risk-on macro regime and Fed's dovish pivot signal medium-term support; institutional accumulation ($52B net reserves) provides a bid beneath weakness."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Fed's 'cautious interest rate path' as inflation moderates is structurally positive for risk assets and Bitcoin's macro beta. Absence of hawkish repricing near-term, but jobs data delays policy easing timeline\u2014supportive medium-term, headwind short-term. | Nonfarm payrolls surprise (unspecified direction, likely stronger) derails soft-landing narrative and pushes rate-cut expectations rightward. RBI liquidity absorption signals potential tightening in Asian credit cycle, but U.S. risk-on regime dominates BTCUSD setup. Crypto retail flows (meme + stock pairing on Robinhood) indicate broadening speculative participation, not institutional conviction."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 80081.37 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.0R, TP at +2.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:07.093548+00:00",
+    "agent_name": "base",
+    "provider": "anthropic",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "You are the base macro agent for QuantEdge AI. Role: . Respond ONLY with a valid JSON object containing exactly these keys: bias (number from -1 to 1), confidence (number from 0 to 1), rationale (short string), regime_hint (one of: risk-on, risk-off, stagflation, deflation).",
+    "user_prompt": "{\"headlines\": [\"Fed raises rates\"]}",
+    "response_text": "{\"bias\": 0.7, \"confidence\": 0.85, \"rationale\": \"Rate hike\", \"regime_hint\": \"stagflation\"}",
+    "parsed_json": {
+      "bias": 0.7,
+      "confidence": 0.85,
+      "rationale": "Rate hike",
+      "regime_hint": "stagflation"
+    },
+    "latency_ms": 0.14,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:10.051332+00:00",
+    "agent_name": "hawkish",
+    "provider": "anthropic",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "You are the hawkish macro agent for QuantEdge AI. Role: Analyze CPI, NFP, and Fed statements for inflationary / rate-hike implications. Bias positive when inflation risk and policy tightening dominate.. Respond ONLY with a valid JSON object containing exactly these keys: bias (number from -1 to 1), confidence (number from 0 to 1), rationale (short string), regime_hint (one of: risk-on, risk-off, stagflation, deflation).",
+    "user_prompt": "{\"headlines\": [\"CPI inflation surprise forces hawkish Fed\"], \"calendar\": [], \"as_of\": \"2026-09-06T05:42:07.742463+00:00\"}",
+    "response_text": "```json\n{\n  \"bias\": 0.72,\n  \"confidence\": 0.78,\n  \"rationale\": \"CPI inflation surprise indicates persistent price pressures, triggering hawkish Fed response. This supports higher-for-longer rate expectations and reinforces inflation-fighting stance. Positive bias reflects heightened tightening cycle risk.\",\n  \"regime_hint\": \"risk-off\"\n}\n```",
+    "parsed_json": {
+      "bias": 0.72,
+      "confidence": 0.78,
+      "rationale": "CPI inflation surprise indicates persistent price pressures, triggering hawkish Fed response. This supports higher-for-longer rate expectations and reinforces inflation-fighting stance. Positive bias reflects heightened tightening cycle risk.",
+      "regime_hint": "risk-off"
+    },
+    "latency_ms": 2308.67,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:12.490326+00:00",
+    "agent_name": "dovish",
+    "provider": "anthropic",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "You are the dovish macro agent for QuantEdge AI. Role: Evaluate growth slowdowns, yield curve inversions, and liquidity distress. Bias positive when easing / risk-off growth concerns dominate.. Respond ONLY with a valid JSON object containing exactly these keys: bias (number from -1 to 1), confidence (number from 0 to 1), rationale (short string), regime_hint (one of: risk-on, risk-off, stagflation, deflation).",
+    "user_prompt": "{\"headlines\": [\"CPI inflation surprise forces hawkish Fed\"], \"calendar\": [], \"as_of\": \"2026-09-06T05:42:07.742463+00:00\"}",
+    "response_text": "```json\n{\n  \"bias\": -0.65,\n  \"confidence\": 0.78,\n  \"rationale\": \"CPI surprise to the upside forces Fed into hawkish stance, reducing near-term easing probability. Inflation concerns dominate growth slowdown narrative. Dovish positioning weakened significantly.\",\n  \"regime_hint\": \"risk-off\"\n}\n```",
+    "parsed_json": {
+      "bias": -0.65,
+      "confidence": 0.78,
+      "rationale": "CPI surprise to the upside forces Fed into hawkish stance, reducing near-term easing probability. Inflation concerns dominate growth slowdown narrative. Dovish positioning weakened significantly.",
+      "regime_hint": "risk-off"
+    },
+    "latency_ms": 1664.44,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:15.558604+00:00",
+    "agent_name": "commodity_specialist",
+    "provider": "anthropic",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "You are the commodity_specialist macro agent for QuantEdge AI. Role: Evaluate supply-side shocks, OPEC decisions, geopolitics, and commodity inventories affecting XAUUSD and USOIL.. Respond ONLY with a valid JSON object containing exactly these keys: bias (number from -1 to 1), confidence (number from 0 to 1), rationale (short string), regime_hint (one of: risk-on, risk-off, stagflation, deflation).",
+    "user_prompt": "{\"headlines\": [\"CPI inflation surprise forces hawkish Fed\"], \"calendar\": [], \"as_of\": \"2026-09-06T05:42:07.742463+00:00\"}",
+    "response_text": "```json\n{\n  \"bias\": 0.35,\n  \"confidence\": 0.72,\n  \"rationale\": \"Hawkish Fed pivot from inflation surprise typically strengthens USD, pressuring XAUUSD downward (-), but stagflationary concerns support safe-haven gold demand (+). USOIL benefits from inflation expectations and potential supply tightening, offsetting near-term demand destruction. Net effect: mild bullish bias for commodities as inflation expectations rise despite rate hike expectations.\",\n  \"regime_hint\": \"stagflation\"\n}\n```",
+    "parsed_json": {
+      "bias": 0.35,
+      "confidence": 0.72,
+      "rationale": "Hawkish Fed pivot from inflation surprise typically strengthens USD, pressuring XAUUSD downward (-), but stagflationary concerns support safe-haven gold demand (+). USOIL benefits from inflation expectations and potential supply tightening, offsetting near-term demand destruction. Net effect: mild bullish bias for commodities as inflation expectations rise despite rate hike expectations.",
+      "regime_hint": "stagflation"
+    },
+    "latency_ms": 2367.41,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:16.305436+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79400.0",
+    "response_text": "AGENTS DEBATING (3/5 Agreed): Pending approval from btcusd_macro_specialist, LiquidityAgent.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": false,
+      "agreed_count": 3,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": false,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 dissents: Asset stance is BULLISH (+0.25), conflicting with SHORT entry."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": false,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79400.00 (Trend: bearish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.5x, Breakeven at +1.0R, TP at +2.2R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:16.317110+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD SHORT at 79750.0",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on SHORT execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "short",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-OFF liquidity contraction / M15 breakdown favors tactical SHORT."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) confirms tactical SHORT execution (Stance: BEARISH -0.45). Catalysts: Institutional risk-off de-risking and liquidation cascade observed."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 79750.00 (Trend: bearish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.2R, TP at +4.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  },
+  {
+    "timestamp": "2026-09-06T05:42:16.323071+00:00",
+    "agent_name": "quantedge_btcusd_order_consensus",
+    "provider": "multi_agent_committee",
+    "model": "claude-haiku-4-5-20251001",
+    "system_prompt": "Multi-Agent Order Discussion & Consensus Protocol",
+    "user_prompt": "Evaluate order execution for BTCUSD LONG at 82100.0",
+    "response_text": "UNANIMOUS CONSENSUS (5/5 Agents Agreed): All specialized agents (Regime PM, Claude Haiku 4.5 Specialist, Liquidity, Technical Reasoner, and Risk Guard) agree on LONG execution.",
+    "parsed_json": {
+      "asset": "BTCUSD",
+      "side": "long",
+      "all_agreed": true,
+      "agreed_count": 5,
+      "total_agents": 5,
+      "votes": [
+        {
+          "agent": "RegimePM",
+          "role": "Global Macro Panel Lead",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Global Macro & Risk Cycle",
+          "argument": "RISK-ON risk appetite drives digital asset inflows."
+        },
+        {
+          "agent": "btcusd_macro_specialist",
+          "role": "Anthropic Claude Haiku 4.5 Asset Analyst",
+          "agreed": true,
+          "confidence": 0.85,
+          "perspective": "Asset-Specific News & Catalysts",
+          "argument": "Claude Haiku 4.5 (claude-haiku-4-5-20251001) stance BULLISH (+0.55) aligns with LONG execution. Catalysts: Massive institutional spot ETF inflows announced."
+        },
+        {
+          "agent": "LiquidityAgent",
+          "role": "Institutional Rates & Liquidity Strategist",
+          "agreed": true,
+          "confidence": 0.8,
+          "perspective": "Central Bank Policy & Liquidity",
+          "argument": "Monetary & Liquidity panel confirmed: Central bank rate path monitored. | Institutional liquidity conditions stable."
+        },
+        {
+          "agent": "TechnicalReasoner",
+          "role": "Quant Strategy Allocator Engine",
+          "agreed": true,
+          "confidence": 0.9,
+          "perspective": "Live MT4 Indicators & M15 Geometry",
+          "argument": "Live MT4 M15 trigger confirmed at price 82100.00 (Trend: bullish). Entry criteria verified."
+        },
+        {
+          "agent": "RiskGuard",
+          "role": "Institutional Risk Manager",
+          "agreed": true,
+          "confidence": 0.95,
+          "perspective": "1% Capital Preservation & Asymmetric R:R",
+          "argument": "Risk parameters approved: 1% account risk, ATR stop mult 1.8x, Breakeven at +1.2R, TP at +4.0R."
+        }
+      ]
+    },
+    "latency_ms": 15.0,
+    "cached": false,
+    "helicone_enabled": true,
+    "langsmith_enabled": true
+  }
+]

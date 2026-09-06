@@ -1,0 +1,31 @@
+{
+  "cached_at": "2026-09-06T05:42:16.267447+00:00",
+  "expires_at": "2026-09-07T05:42:16.267447+00:00",
+  "regime": "risk-off",
+  "confidence": 0.73,
+  "summary": "hawkish: CPI inflation surprise indicates persistent price pressures, triggering hawkish Fed response. This supports higher-for-l; dovish: CPI surprise to the upside forces Fed into hawkish stance, reducing near-term easing probability. Inflation concerns dom; commodity_specialist: Hawkish Fed pivot from inflation surprise typically strengthens USD, pressuring XAUUSD downward (-), but stagflationary ",
+  "debates": [
+    {
+      "agent": "hawkish",
+      "bias": 0.72,
+      "confidence": 0.78,
+      "rationale": "CPI inflation surprise indicates persistent price pressures, triggering hawkish Fed response. This supports higher-for-longer rate expectations and reinforces inflation-fighting stance. Positive bias reflects heightened tightening cycle risk.",
+      "regime_hint": "risk-off"
+    },
+    {
+      "agent": "dovish",
+      "bias": -0.65,
+      "confidence": 0.78,
+      "rationale": "CPI surprise to the upside forces Fed into hawkish stance, reducing near-term easing probability. Inflation concerns dominate growth slowdown narrative. Dovish positioning weakened significantly.",
+      "regime_hint": "risk-off"
+    },
+    {
+      "agent": "commodity_specialist",
+      "bias": 0.35,
+      "confidence": 0.72,
+      "rationale": "Hawkish Fed pivot from inflation surprise typically strengthens USD, pressuring XAUUSD downward (-), but stagflationary concerns support safe-haven gold demand (+). USOIL benefits from inflation expectations and potential supply tightening, offsetting near-term demand destruction. Net effect: mild bullish bias for commodities as inflation expectations rise despite rate hike expectations.",
+      "regime_hint": "stagflation"
+    }
+  ],
+  "headlines_count": 1
+}

@@ -1,0 +1,18 @@
+[project]
+name = "quantedge"
+version = "0.1.0"
+description = "Autonomous multi-asset trading system with OpenAI macro consensus and Exness execution"
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
