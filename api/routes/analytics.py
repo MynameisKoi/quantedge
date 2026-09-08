@@ -10,10 +10,13 @@ from fastapi import APIRouter
 
 from config.settings import settings
 from core.portfolio import Position, portfolio
+from core.rl.midnight_learner import midnight_learner
 from core.rl.missed_opportunity_analyzer import missed_opportunity_analyzer
+from core.rl.quantedge_tracker import quantedge_tracker
 from core.rl.trade_memory import trade_memory
 from data.feeds.live_price_feed import live_price_feed
 from execution.bridge.facade import ensure_bridge
+from execution.bridge.mt4_history_parser import mt4_history_parser
 from macro.asset_macro_manager import asset_macro_manager
 from macro.regime_classifier import regime_classifier
 from macro.scheduler import macro_scheduler
@@ -37,21 +40,28 @@ async def get_daily_analytics() -> dict[str, Any]:
     today_trades: list[dict[str, Any]] = []
 
     for t in raw_history:
-        close_time = t.get("close_time", 0)
-        if close_time > 0:
-            c_date = datetime.fromtimestamp(close_time, UTC).strftime("%Y-%m-%d")
-            if c_date == today_str:
-                raw_sym = t.get("symbol", "")
-                norm_sym = raw_sym[:-1] if raw_sym.endswith("m") else raw_sym
-                today_trades.append({
-                    "asset": norm_sym,
-                    "side": t.get("side", "long"),
-                    "volume": float(t.get("volume", 0.01)),
-                    "net_pnl": float(t.get("net_pnl", t.get("profit", 0.0))),
-                    "ticket": str(t.get("ticket", "")),
-                    "open_time": t.get("open_time"),
-                    "close_time": close_time,
-                })
+        c_date = ""
+        if "timestamp" in t and t["timestamp"]:
+            c_date = str(t["timestamp"])[:10]
+        elif t.get("close_time", 0) > 0:
+            c_date = datetime.fromtimestamp(t["close_time"], UTC).strftime("%Y-%m-%d")
+        elif t.get("date"):
+            d = str(t["date"])
+            if len(d) == 8:
+                c_date = f"{d[:4]}-{d[4:6]}-{d[6:8]}"
+
+        if c_date == today_str:
+            raw_sym = t.get("symbol", "")
+            norm_sym = raw_sym[:-1] if raw_sym.endswith("m") else raw_sym
+            today_trades.append({
+                "asset": norm_sym,
+                "side": t.get("side", "long"),
+                "volume": float(t.get("lots", t.get("volume", 0.01))),
+                "net_pnl": float(t.get("pnl", t.get("net_pnl", t.get("profit", 0.0)))),
+                "ticket": str(t.get("ticket", "")),
+                "open_time": t.get("open_time"),
+                "close_time": t.get("close_time", 0),
+            })
 
     # Include any portfolio experiences recorded today (avoiding ticket duplicates)
     existing_tickets = {str(t.get("ticket")) for t in today_trades if t.get("ticket")}
@@ -81,8 +91,12 @@ async def get_daily_analytics() -> dict[str, Any]:
     avg_win = round(gross_profit / max(len(winning_trades), 1), 2) if len(winning_trades) > 0 else 0.0
     avg_loss = round(gross_loss / max(len(losing_trades), 1), 2) if len(losing_trades) > 0 else 0.0
 
-    # Asset breakdown for today directly from MT4 stats and live strategy
-    assets = ["XAUUSD", "USOIL", "EURUSD", "BTCUSD"]
+    # Load MT4 terminal ground-truth performance metrics
+    mt4_metrics = mt4_history_parser.compute_performance_metrics()
+    mt4_breakdown = mt4_metrics.get("asset_breakdown", {})
+
+    # Asset breakdown directly from MT4 stats and live strategy
+    assets = ["XAUUSD", "BTCUSD", "USOIL", "EURUSD"]
     mt4_all = live_price_feed.get_mt4_stats()
     allocations = adaptive_live_strategy.get_live_analysis()
 
@@ -96,6 +110,14 @@ async def get_daily_analytics() -> dict[str, Any]:
         a_wins = [t for t in a_trades if t.get("net_pnl", 0.0) > 0]
         a_pnl = sum(t.get("net_pnl", 0.0) for t in a_trades)
         a_wr = round((len(a_wins) / max(len(a_trades), 1)) * 100, 1) if a_trades else 0.0
+
+        mt4_sym = mt4_breakdown.get(a, {})
+        has_today = len(a_trades) > 0
+        trades_count = len(a_trades) if has_today else mt4_sym.get("trades", 0)
+        wins_count = len(a_wins) if has_today else mt4_sym.get("wins", 0)
+        losses_count = (trades_count - wins_count) if has_today else mt4_sym.get("losses", 0)
+        wr_val = a_wr if has_today else mt4_sym.get("win_rate_pct", 0.0)
+        pnl_val = round(a_pnl, 2) if has_today else mt4_sym.get("net_pnl", 0.0)
 
         open_pos = [p for p in portfolio.positions.values() if p.symbol == a]
         open_count = len(open_pos)
@@ -119,10 +141,17 @@ async def get_daily_analytics() -> dict[str, Any]:
             "asset": a,
             "strategy": a_alloc.get("strategy_name", "Adaptive M15"),
             "live_price": live_price,
-            "trades": len(a_trades),
-            "wins": len(a_wins),
-            "win_rate": a_wr,
-            "net_pnl": round(a_pnl, 2),
+            "trades": trades_count,
+            "wins": wins_count,
+            "losses": losses_count,
+            "win_rate": wr_val,
+            "net_pnl": pnl_val,
+            "today_trades": len(a_trades),
+            "today_pnl": round(a_pnl, 2),
+            "today_win_rate": a_wr,
+            "mt4_lifetime_trades": mt4_sym.get("trades", 0),
+            "mt4_lifetime_pnl": mt4_sym.get("net_pnl", 0.0),
+            "mt4_lifetime_win_rate": mt4_sym.get("win_rate_pct", 0.0),
             "open_positions": open_count,
             "open_volume": round(open_vol, 2),
             "unrealized_pnl": round(unrealized, 2),
@@ -217,19 +246,22 @@ async def get_daily_analytics() -> dict[str, Any]:
             "live_trading_enabled": settings.enable_live_trading,
         },
         "daily_performance": {
-            "net_pnl": round(net_pnl, 2),
-            "win_rate_pct": win_rate,
-            "total_trades": total_trades,
-            "wins": len(winning_trades),
-            "losses": len(losing_trades),
-            "scratches": len(scratch_trades),
-            "profit_factor": profit_factor,
-            "gross_profit": round(gross_profit, 2),
-            "gross_loss": round(gross_loss, 2),
-            "avg_win": avg_win,
-            "avg_loss": avg_loss,
+            "net_pnl": round(net_pnl, 2) if total_trades > 0 else mt4_metrics["net_pnl"],
+            "win_rate_pct": win_rate if total_trades > 0 else mt4_metrics["win_rate_pct"],
+            "total_trades": total_trades if total_trades > 0 else mt4_metrics["total_trades"],
+            "wins": len(winning_trades) if total_trades > 0 else mt4_metrics["wins"],
+            "losses": len(losing_trades) if total_trades > 0 else mt4_metrics["losses"],
+            "scratches": len(scratch_trades) if total_trades > 0 else mt4_metrics["scratches"],
+            "profit_factor": profit_factor if total_trades > 0 else mt4_metrics["profit_factor"],
+            "gross_profit": round(gross_profit, 2) if total_trades > 0 else mt4_metrics["gross_profit"],
+            "gross_loss": round(gross_loss, 2) if total_trades > 0 else mt4_metrics["gross_loss"],
+            "max_drawdown_pct": mt4_metrics["max_drawdown_pct"],
+            "avg_win": avg_win if total_trades > 0 else mt4_metrics["avg_win"],
+            "avg_loss": avg_loss if total_trades > 0 else mt4_metrics["avg_loss"],
+            "historical_metrics": mt4_metrics,
         },
         "asset_breakdown": asset_stats,
+        "mt4_asset_breakdown": mt4_breakdown,
         "open_positions": open_positions,
         "strategy_status": allocations,
         "asset_macro": asset_macro_manager.get_summary(),
@@ -284,12 +316,20 @@ async def get_performance_reports() -> dict[str, Any]:
     trade_mode = bridge_info.get("trade_mode", settings.exness_account_type)
 
     # Real closed trades from MT4 history export
+    mt4_metrics = mt4_history_parser.compute_performance_metrics()
+    mt4_breakdown = mt4_metrics.get("asset_breakdown", {})
+
     raw_history = getattr(bridge, "get_history", lambda: [])()
     closed_trades_total = len(raw_history)
-    winning = [t for t in raw_history if float(t.get("net_pnl", t.get("profit", 0.0))) > 0]
-    losing = [t for t in raw_history if float(t.get("net_pnl", t.get("profit", 0.0))) < 0]
-    real_net_pnl = sum(float(t.get("net_pnl", t.get("profit", 0.0))) for t in raw_history)
-    real_wr = round((len(winning) / max(closed_trades_total, 1)) * 100, 1) if closed_trades_total > 0 else 0.0
+    if closed_trades_total > 0:
+        winning = [t for t in raw_history if float(t.get("pnl", t.get("net_pnl", t.get("profit", 0.0)))) > 0]
+        losing = [t for t in raw_history if float(t.get("pnl", t.get("net_pnl", t.get("profit", 0.0)))) < 0]
+        real_net_pnl = sum(float(t.get("pnl", t.get("net_pnl", t.get("profit", 0.0)))) for t in raw_history)
+        real_wr = round((len(winning) / max(closed_trades_total, 1)) * 100, 1)
+    else:
+        closed_trades_total = mt4_metrics.get("total_trades", 0)
+        real_net_pnl = mt4_metrics.get("net_pnl", 0.0)
+        real_wr = mt4_metrics.get("win_rate_pct", 0.0)
 
     # Live assets performance directly from Exness MT4 indicators & open positions
     mt4_all = live_price_feed.get_mt4_stats()
@@ -302,9 +342,16 @@ async def get_performance_reports() -> dict[str, Any]:
         live_px = float(a_mt4.get("price", a_mt4.get("bid", 0.0)))
 
         a_closed = [t for t in raw_history if t.get("symbol", "").startswith(a)]
-        a_wins = [t for t in a_closed if float(t.get("net_pnl", 0.0)) > 0]
-        a_pnl = sum(float(t.get("net_pnl", 0.0)) for t in a_closed)
-        a_wr = round((len(a_wins) / max(len(a_closed), 1)) * 100, 1) if a_closed else 0.0
+        mt4_sym = mt4_breakdown.get(a, {})
+        if a_closed:
+            a_wins = [t for t in a_closed if float(t.get("pnl", t.get("net_pnl", 0.0))) > 0]
+            a_pnl = sum(float(t.get("pnl", t.get("net_pnl", 0.0))) for t in a_closed)
+            a_wr = round((len(a_wins) / max(len(a_closed), 1)) * 100, 1)
+            t_count = len(a_closed)
+        else:
+            t_count = mt4_sym.get("trades", 0)
+            a_wr = mt4_sym.get("win_rate_pct", 0.0)
+            a_pnl = mt4_sym.get("net_pnl", 0.0)
 
         pos_count = len([p for p in portfolio.positions.values() if p.symbol == a])
 
@@ -313,7 +360,7 @@ async def get_performance_reports() -> dict[str, Any]:
             "live_price": live_px,
             "win_rate": a_wr,
             "pnl": round(a_pnl, 2),
-            "trades": len(a_closed),
+            "trades": t_count,
             "open_positions": pos_count,
             "status": "Active Leader" if a in ("XAUUSD", "USOIL") else "Selective",
         }
@@ -770,5 +817,43 @@ async def get_asset_chart(
             "donchian_poc": don_poc_series,
         },
     }
+
+
+@router.get("/quantedge/executions")
+@router.get("/intentguard/executions")
+async def get_quantedge_executions() -> dict[str, Any]:
+    """Return historical QuantEdge executions with full 5-agent deliberation dialogues."""
+    # Ensure synced with latest MT4 closed logs
+    closed_trades = mt4_history_parser.parse_closed_trades(days_back=7)
+    synced = quantedge_tracker.sync_with_mt4_history(closed_trades)
+    return {
+        "total_executions": len(synced),
+        "executions": synced,
+    }
+
+
+@router.get("/midnight-learner/latest")
+async def get_latest_midnight_audit() -> dict[str, Any]:
+    """Return the most recent 00:00 UTC daily learning audit report."""
+    return midnight_learner.get_latest_audit()
+
+
+@router.post("/midnight-learner/run")
+async def run_midnight_audit() -> dict[str, Any]:
+    """Trigger the 00:00 UTC Midnight Execution Auditor on-demand."""
+    return midnight_learner.run_daily_audit()
+
+
+@router.get("/rl/policy")
+async def get_rl_policy_status() -> dict[str, Any]:
+    """Return the active Contextual Bandit / Q-Learning policy weights and adaptation stats."""
+    from core.rl.trade_learner import rl_policy
+    return {
+        "updated_at": datetime.now(UTC).isoformat(),
+        "summary": rl_policy.get_policy_summary(),
+        "strategy_q_table": rl_policy.strategy_q_table,
+        "strategy_counts": rl_policy.strategy_counts,
+    }
+
 
 

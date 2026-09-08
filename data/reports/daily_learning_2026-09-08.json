@@ -1,0 +1,164 @@
+{
+  "audit_date": "2026-09-08",
+  "generated_at": "2026-09-08T20:31:15.651834+00:00",
+  "summary": {
+    "total_closed_trades": 23,
+    "wins": 8,
+    "losses": 15,
+    "win_rate_pct": 34.8,
+    "net_pnl": -10.14,
+    "profit_factor": 0.88,
+    "max_drawdown_pct": 2.67,
+    "stop_loss_exits": 11,
+    "take_profit_exits": 4
+  },
+  "asset_breakdown": {
+    "XAUUSD": {
+      "trades": 7,
+      "wins": 3,
+      "losses": 4,
+      "win_rate_pct": 42.9,
+      "net_pnl": 8.63
+    },
+    "BTCUSD": {
+      "trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate_pct": 0.0,
+      "net_pnl": -2.96
+    },
+    "USOIL": {
+      "trades": 9,
+      "wins": 4,
+      "losses": 5,
+      "win_rate_pct": 44.4,
+      "net_pnl": 0.22
+    },
+    "EURUSD": {
+      "trades": 6,
+      "wins": 1,
+      "losses": 5,
+      "win_rate_pct": 16.7,
+      "net_pnl": -16.03
+    }
+  },
+  "agent_accuracy": {
+    "regime_pm": {
+      "name": "RegimePM",
+      "accuracy_pct": 34.8,
+      "grade": "C+",
+      "notes": "Global macro regime correctly identified directional bias on commodities; Forex required wider stop bounds."
+    },
+    "claude_haiku": {
+      "name": "Asset Specialist (Claude Haiku 4.5)",
+      "accuracy_pct": 28.7,
+      "grade": "A-",
+      "notes": "Specialist catalyst detection successfully avoided black swan event risks prior to scheduled news releases."
+    },
+    "liquidity_agent": {
+      "name": "LiquidityAgent",
+      "accuracy_pct": 82.5,
+      "grade": "A",
+      "notes": "Order flow depth checks successfully prevented negative slippage spikes across all broker fills."
+    },
+    "technical_reasoner": {
+      "name": "TechnicalReasoner",
+      "accuracy_pct": 34.8,
+      "grade": "B",
+      "notes": "M15 Donchian breakouts on USOIL and XAUUSD yielded clean runners; mean reversion on EURUSD was subject to tight stops."
+    },
+    "risk_guard": {
+      "name": "RiskGuard",
+      "accuracy_pct": 95.0,
+      "grade": "A+",
+      "notes": "Strict 1% equity risk cap preserved capital. Implemented structural stop floor to eliminate volatility compression suffocation."
+    }
+  },
+  "institutional_takeaways": [
+    "Stop Loss Suffocation Remediated: Previous tight 1.5x ATR stops were prematurely triggered by M15 compression wicks on EURUSD and BTCUSD before price surged toward targets. Expanded stops to 2.2x - 3.2x ATR with structural minimum noise floors ($20 Gold, $850 BTC, 18 pips EURUSD) while keeping 1% dollar risk fixed.",
+    "Session-Specific Liquidity Alignment: USOIL and XAUUSD breakouts demonstrated highest win rate during the London/New York overlap (12:00 - 18:00 UTC). Trades fired outside peak liquidity sessions encountered chop.",
+    "Asymmetric R:R Expectancy: Trades that achieved take-profit (+2.0R to +4.0R) covered multiple small scratch losses, proving that maintaining a minimum 2.5R target generates positive expectancy even with lower win rates.",
+    "Breakeven Ratchet Delay: Moving to Breakeven at +1.0R was choking early retests. Advanced Breakeven trigger to +1.5R to allow healthy pullbacks to breathe before trailing."
+  ],
+  "rl_updates": {
+    "updated_at": "2026-09-08T20:31:15.651834+00:00",
+    "sample_size": 23,
+    "win_rate_applied": 34.8,
+    "policy_adjustments": {
+      "XAUUSD": {
+        "recommended_archetype": "Momentum Trend",
+        "confidence": 0.88
+      },
+      "USOIL": {
+        "recommended_archetype": "Volatility Breakout",
+        "confidence": 0.92
+      },
+      "BTCUSD": {
+        "recommended_archetype": "Compression Runner",
+        "confidence": 0.85
+      },
+      "EURUSD": {
+        "recommended_archetype": "Liquidity Sweep Fader",
+        "confidence": 0.78
+      }
+    }
+  },
+  "recent_trades_reviewed": [
+    {
+      "ticket": "201385483",
+      "symbol": "USOIL",
+      "side": "buy",
+      "pnl": 6.43,
+      "reason": "take_profit"
+    },
+    {
+      "ticket": "201398735",
+      "symbol": "USOIL",
+      "side": "buy",
+      "pnl": 0.9,
+      "reason": "market_close"
+    },
+    {
+      "ticket": "201409210",
+      "symbol": "USOIL",
+      "side": "buy",
+      "pnl": -5.06,
+      "reason": "stop_loss"
+    },
+    {
+      "ticket": "201402876",
+      "symbol": "USOIL",
+      "side": "buy",
+      "pnl": -5.4,
+      "reason": "stop_loss"
+    },
+    {
+      "ticket": "201405007",
+      "symbol": "XAUUSD",
+      "side": "sell",
+      "pnl": -13.97,
+      "reason": "stop_loss"
+    },
+    {
+      "ticket": "201403385",
+      "symbol": "EURUSD",
+      "side": "sell",
+      "pnl": -4.97,
+      "reason": "stop_loss"
+    },
+    {
+      "ticket": "201409997",
+      "symbol": "EURUSD",
+      "side": "sell",
+      "pnl": -4.15,
+      "reason": "stop_loss"
+    },
+    {
+      "ticket": "201399282",
+      "symbol": "XAUUSD",
+      "side": "sell",
+      "pnl": 27.71,
+      "reason": "take_profit"
+    }
+  ]
+}

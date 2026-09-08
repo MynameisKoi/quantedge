@@ -47,10 +47,10 @@ def test_btcusd_strategy_structure_and_params():
     strat = BtcUsdAdaptiveStrategy()
     assert strat.name == "btcusd_volatility_expansion"
     assert strat.asset == "BTCUSD"
-    assert strat.sl_atr_mult == 1.8
-    assert strat.be_r == 1.0
-    assert strat.partial_r == 2.0
-    assert strat.trail_atr_mult == 2.5
+    assert strat.sl_atr_mult == 2.8
+    assert strat.be_r == 1.5
+    assert strat.partial_r == 2.5
+    assert strat.trail_atr_mult == 3.0
 
 
 def test_btcusd_strategy_bullish_evaluation():
@@ -65,7 +65,7 @@ def test_btcusd_strategy_bullish_evaluation():
     assert "score" in res
     assert "atr" in res
     assert res["atr"] > 0
-    assert res["sl_mult"] == 1.8  # Weekday stop
+    assert res["sl_mult"] == 2.8  # Weekday stop
     assert "indicators" in res
     assert "math_rules" in res
     assert "educational_guide" in res
@@ -73,14 +73,14 @@ def test_btcusd_strategy_bullish_evaluation():
 
 
 def test_btcusd_strategy_weekend_stop_cushion():
-    """Verify BtcUsdAdaptiveStrategy dynamically expands stop cushion to 2.2 ATR on weekends."""
+    """Verify BtcUsdAdaptiveStrategy dynamically expands stop cushion to 3.2 ATR on weekends."""
     strat = BtcUsdAdaptiveStrategy()
     df = _generate_synthetic_m15_btc("bullish", n_bars=60)
     # Saturday 12:00 UTC (Weekend)
     weekend_time = pd.Timestamp("2026-09-05 12:00:00", tz="UTC")
 
     res = strat.evaluate(df_m15=df, timestamp=weekend_time)
-    assert res["sl_mult"] == 2.2  # Expanded weekend stop loss cushion to prevent wick hunting
+    assert res["sl_mult"] == 3.2  # Expanded weekend stop loss cushion to prevent wick hunting
     assert "Weekend" in res["indicators"]["session"]
 
 

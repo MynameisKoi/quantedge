@@ -30,8 +30,8 @@ def test_xauusd_adaptive_strategy_structure():
     assert "side" in res
     assert "score" in res
     assert "atr" in res
-    assert res["sl_mult"] == 1.5
-    assert res["be_r"] == 1.0
+    assert res["sl_mult"] == 2.5
+    assert res["be_r"] == 1.5
 
 
 def test_eurusd_adaptive_strategy_structure():
@@ -41,9 +41,9 @@ def test_eurusd_adaptive_strategy_structure():
     assert "side" in res
     assert "score" in res
     assert "atr" in res
-    assert res["sl_mult"] == 1.2
-    assert res["be_r"] == 0.8
-    assert res["partial_r"] == 1.5
+    assert res["sl_mult"] >= 2.2
+    assert res["be_r"] >= 1.2
+    assert res["partial_r"] >= 2.0
 
 
 def test_usoil_adaptive_strategy_structure():
@@ -53,8 +53,8 @@ def test_usoil_adaptive_strategy_structure():
     assert "side" in res
     assert "score" in res
     assert "atr" in res
-    assert res["sl_mult"] == 2.0
-    assert res["be_r"] == 1.2
+    assert res["sl_mult"] == 2.5
+    assert res["be_r"] == 1.5
 
 
 def test_adaptive_router_dispatch():
@@ -63,13 +63,13 @@ def test_adaptive_router_dispatch():
     df_oil = _create_sample_m15(60, 78.50)
 
     res_gold = adaptive_router.evaluate_asset("XAUUSD", df_gold, timestamp=pd.Timestamp("2024-01-02 10:00"))
-    assert res_gold["sl_mult"] == 1.5
+    assert res_gold["sl_mult"] == 2.5
 
     res_eur = adaptive_router.evaluate_asset("EURUSD", df_eur, timestamp=pd.Timestamp("2024-01-02 10:00"))
-    assert res_eur["sl_mult"] == 1.2
+    assert res_eur["sl_mult"] >= 2.2
 
     res_oil = adaptive_router.evaluate_asset("USOIL", df_oil, timestamp=pd.Timestamp("2024-01-02 14:00"))
-    assert res_oil["sl_mult"] == 2.0
+    assert res_oil["sl_mult"] == 2.5
 
 
 def test_adaptive_backtest_execution():

@@ -89,3 +89,33 @@ def test_rl_policy_learning():
     post_win_eval = policy.evaluate_setup("EURUSD", "risk-on", "bullish", "pullback_ema", "m5_bull_shift", explore=False)
     assert post_win_eval["q_value"] > 1.0
     assert post_win_eval["action"] == "execute_full"
+
+
+def test_strategy_q_table_learning_and_persistence(tmp_path: Path):
+    policy_file = tmp_path / "test_rl_policy.json"
+    policy = TradeRLPolicy(learning_rate=0.5, exploration_rate=0.0, policy_file=policy_file)
+
+    # Initial selection for strong trend
+    choice1 = policy.select_strategy("XAUUSD", "risk-on", adx=30.0, atr_pct=0.005, explore=False)
+    assert choice1["selected_strategy"] == "momentum_impulse"
+    init_q = choice1["q_values"]["momentum_impulse"]
+
+    # Penalize momentum_impulse after hitting S/L (-1.5 reward)
+    policy.learn_from_strategy_outcome("XAUUSD", "risk-on", adx=30.0, atr_pct=0.005, archetype="momentum_impulse", reward=-1.5)
+    choice2 = policy.select_strategy("XAUUSD", "risk-on", adx=30.0, atr_pct=0.005, explore=False)
+    assert choice2["q_values"]["momentum_impulse"] < init_q
+    # Now value_pullback should take the lead!
+    assert choice2["selected_strategy"] == "value_pullback"
+
+    # Boost value_pullback after a large +3.0R win
+    policy.learn_from_strategy_outcome("XAUUSD", "risk-on", adx=30.0, atr_pct=0.005, archetype="value_pullback", reward=3.0)
+    choice3 = policy.select_strategy("XAUUSD", "risk-on", adx=30.0, atr_pct=0.005, explore=False)
+    assert choice3["q_values"]["value_pullback"] > 0.5
+    assert choice3["selected_strategy"] == "value_pullback"
+
+    # Verify persistence: reload policy from disk
+    policy2 = TradeRLPolicy(learning_rate=0.5, exploration_rate=0.0, policy_file=policy_file)
+    choice_reloaded = policy2.select_strategy("XAUUSD", "risk-on", adx=30.0, atr_pct=0.005, explore=False)
+    assert choice_reloaded["selected_strategy"] == "value_pullback"
+    assert choice_reloaded["q_values"]["value_pullback"] == choice3["q_values"]["value_pullback"]
+

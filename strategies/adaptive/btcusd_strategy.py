@@ -78,10 +78,10 @@ class BtcUsdAdaptiveStrategy:
     asset = "BTCUSD"
 
     def __init__(self) -> None:
-        self.sl_atr_mult = 1.8
-        self.be_r = 1.0
-        self.partial_r = 2.0
-        self.trail_atr_mult = 2.5
+        self.sl_atr_mult = 2.8
+        self.be_r = 1.5
+        self.partial_r = 2.5
+        self.trail_atr_mult = 3.0
 
     def evaluate(
         self,
@@ -106,7 +106,7 @@ class BtcUsdAdaptiveStrategy:
             is_cash_hours = 8 <= now_utc.hour < 20
 
         # Dynamic stop cushion: Wider stop on weekends to guard against derivative exchange wick flushes
-        active_sl_mult = 2.2 if is_weekend else self.sl_atr_mult
+        active_sl_mult = 3.2 if is_weekend else self.sl_atr_mult
 
         close = df_m15["close"]
         high = df_m15["high"]
@@ -176,16 +176,17 @@ class BtcUsdAdaptiveStrategy:
             "session": "Weekend 24/7" if is_weekend else ("US/London Cash Liquidity" if is_cash_hours else "Asian Off-Hours"),
         }
 
-        # Robbins Cup Location Filter: Non-directional consolidation when ADX < 20 and inside channel
+        # Robbins Cup Location Filter: Non-directional consolidation when ADX < 22 (or < 26 on weekends)
         poc_val = (float(donchian_high) + float(donchian_low)) / 2.0 if not np.isnan(donchian_high) and not np.isnan(donchian_low) else cur_price
-        if adx_val < 20.0 and not is_squeeze:
+        min_adx_threshold = 26.0 if is_weekend else 22.0
+        if adx_val < min_adx_threshold and not is_squeeze:
             return {
                 "side": "none",
                 "score": 42.0,
                 "atr": atr,
                 "reason": "low_adx_chop",
                 "indicators": indicators,
-                "analysis": f"Robbins Cup Location Filter: Bitcoin ADX is {adx_val:.1f} (<20.0) trapped at POC (${poc_val:.2f}). Preserving capital until momentum breakout.",
+                "analysis": f"Robbins Cup Location Filter: Bitcoin ADX is {adx_val:.1f} (<{min_adx_threshold:.1f}) trapped at POC (${poc_val:.2f}). Preserving capital until momentum breakout.",
                 "checklist": {"session": True, "adx_trend": False, "setup_trigger": False, "score_met": False},
                 "sl_mult": active_sl_mult, "be_r": self.be_r, "partial_r": self.partial_r, "trail_mult": self.trail_atr_mult,
             }
@@ -205,7 +206,8 @@ class BtcUsdAdaptiveStrategy:
             rsi_pullback_reset = 40.0 <= rsi_val <= 58.0
 
             # Trigger B: Robbins Cup Forced Liquidation Breakout beyond 20-bar Donchian High
-            is_breakout = cur_price >= float(donchian_high) and adx_val >= 22.0
+            # Suppress breakouts on illiquid weekends to eliminate derivative liquidation traps!
+            is_breakout = (not is_weekend) and cur_price >= float(donchian_high) and (adx_val >= 25.0 or is_squeeze)
 
             if is_breakout:
                 side = "long"
@@ -236,8 +238,9 @@ class BtcUsdAdaptiveStrategy:
             is_in_relief_zone = cur_price >= (e21_val * 0.998) and cur_price <= (e50_val * 1.002)
             rsi_relief_reset = 42.0 <= rsi_val <= 60.0
 
-            # Trigger B: Robbins Cup Forced Liquidation Breakdown below 20-bar Donchian Low (e.g. 4 Sep 09:45)
-            is_breakdown = cur_price <= float(donchian_low) and adx_val >= 22.0
+            # Trigger B: Robbins Cup Forced Liquidation Breakdown below 20-bar Donchian Low
+            # Suppress breakdowns on illiquid weekends to eliminate derivative liquidation traps!
+            is_breakdown = (not is_weekend) and cur_price <= float(donchian_low) and (adx_val >= 25.0 or is_squeeze)
 
             if is_breakdown:
                 side = "short"

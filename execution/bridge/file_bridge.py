@@ -76,12 +76,16 @@ class FileBridge:
                 return dict(data.get("payload") or {})
             return dict(data)
     def get_history(self) -> list[dict[str, Any]]:
-        """Read closed trades history exported by MT4 EA."""
+        """Read closed trades history exported by MT4 EA or parsed from terminal logs."""
         path = self.root / "history.json"
         data = self._read_json(path)
-        if data and isinstance(data.get("trades"), list):
+        if data and isinstance(data.get("trades"), list) and len(data["trades"]) > 0:
             return data["trades"]
-        return []
+        try:
+            from execution.bridge.mt4_history_parser import mt4_history_parser
+            return mt4_history_parser.parse_closed_trades(days_back=14)
+        except Exception:
+            return []
 
     async def request(
         self,

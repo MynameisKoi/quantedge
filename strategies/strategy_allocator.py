@@ -15,6 +15,7 @@ Implements the Dynamic RL & Regime-Gated Strategy Allocation layer:
 from __future__ import annotations
 
 import logging
+from datetime import datetime, timezone
 from typing import Any
 
 from config.settings import settings
@@ -167,21 +168,11 @@ class StrategyAllocator:
             or live_px <= indicators.get("donchian_low", float("-inf"))
         )
 
-        if asset in ("USOIL", "BTCUSD") and is_breakout_extreme:
+        # Allow RL policy selection to govern unless there is an extreme Donchian liquidation breach
+        if is_breakout_extreme and asset in ("USOIL", "BTCUSD"):
             archetype = "volatility_breakout"
-        elif asset == "EURUSD" and ("bb_lower" in indicators) and (live_px <= indicators.get("bb_lower", float("-inf")) or live_px >= indicators.get("bb_upper", float("inf"))) and (indicators.get("rsi", 50.0) <= 38.0 or indicators.get("rsi", 50.0) >= 62.0):
-            archetype = "mean_revert"
-        elif asset in ("XAUUSD", "BTCUSD") and ("ema21" in indicators) and ("ema50" in indicators):
-            e21 = indicators["ema21"]
-            e50 = indicators["ema50"]
-            is_pullback = (live_px <= e21 and live_px >= e50) if trend == "bullish" else (live_px >= e21 and live_px <= e50)
-            if is_pullback:
-                archetype = "value_pullback"
-        elif adx >= 22.0 and ("ema9" in indicators):
-            e9 = indicators["ema9"]
-            is_momentum = (live_px >= e9) if trend == "bullish" else (live_px <= e9)
-            if is_momentum:
-                archetype = "momentum_impulse"
+        else:
+            archetype = rl_choice["selected_strategy"]
 
         # Strategy Archetype Customization & Educational Content
         archetype_titles = {
@@ -205,9 +196,9 @@ class StrategyAllocator:
         math_rules: dict[str, str] = {}
         educational_guide: dict[str, str] = {}
 
-        sl_mult = 1.5
-        be_r = 1.0
-        partial_r = 2.0
+        sl_mult = 2.2
+        be_r = 1.5
+        partial_r = 2.5
 
         # Robbins Cup Location & Environment Filter (Chop Gate):
         # Assess whether price is trapped at the Point of Control (POC equilibrium)
@@ -239,9 +230,9 @@ class StrategyAllocator:
 
         # Archetype 1: Momentum Impulse Runner (High ADX Impulse Ride)
         if archetype == "momentum_impulse":
-            sl_mult = 1.5
-            be_r = 1.0
-            partial_r = 2.2
+            sl_mult = 2.2
+            be_r = 1.5
+            partial_r = 2.5
             math_rules = {
                 "entry_rule": "Bullish: live_price >= EMA9 & EMA9 > EMA21; Bearish: live_price <= EMA9 & EMA9 < EMA21",
                 "trend_filter": f"ADX >= 20.0 (Current ADX: {adx:.1f})",
@@ -309,9 +300,9 @@ class StrategyAllocator:
 
         # Archetype 2: Value Pullback & Chandelier Runner (Classic Pullback)
         elif archetype == "value_pullback":
-            sl_mult = 1.8
-            be_r = 1.0
-            partial_r = 2.0
+            sl_mult = 2.4
+            be_r = 1.6
+            partial_r = 2.6
             math_rules = {
                 "entry_rule": "Pullback tap into value zone: Long: EMA 21 to EMA 50; Short: EMA 21 to EMA 50",
                 "trend_filter": "EMA 9 > EMA 21 (Bullish) or EMA 9 < EMA 21 (Bearish)",
@@ -391,9 +382,9 @@ class StrategyAllocator:
 
         # Archetype 3: NY Volatility Breakout (Channel Breakout)
         elif archetype == "volatility_breakout":
-            sl_mult = 2.0
-            be_r = 1.0
-            partial_r = 2.0
+            sl_mult = 2.4
+            be_r = 1.5
+            partial_r = 3.0
             math_rules = {
                 "entry_rule": "Long: live_price >= Donchian High / Upper Band; Short: live_price <= Donchian Low / Lower Band",
                 "volatility_filter": "ATR expansion above 20-bar baseline",
@@ -429,11 +420,19 @@ class StrategyAllocator:
                 e50 = indicators.get("ema50", live_px)
                 btc_dh = indicators.get("donchian_high", e50 + 1.5 * atr)
                 btc_dl = indicators.get("donchian_low", e50 - 1.5 * atr)
-                sl_mult = 1.8
-                be_r = 1.2
+                sl_mult = 2.4
+                be_r = 1.5
                 partial_r = 4.0  # Asymmetric multi-thousand dollar runner (+4.0R objective)!
 
-                if live_px <= btc_dl and trend == "bearish":
+                now_utc = datetime.now(timezone.utc)
+                is_weekend = now_utc.weekday() >= 5 or (now_utc.weekday() == 4 and now_utc.hour >= 21)
+                is_weekend_breakout_blocked = check_market_hours and is_weekend
+
+                if is_weekend_breakout_blocked:
+                    score = 45.0
+                    reason = "btc_weekend_breakout_suppressed"
+                    tech_analysis = "Bitcoin Donchian breakout suppressed during illiquid weekend trading. Fading derivative traps."
+                elif live_px <= btc_dl and trend == "bearish" and adx >= 24.0:
                     side = "short"
                     score = 62.0
                     reason = "forced_liquidation_breakdown_short"
@@ -442,7 +441,7 @@ class StrategyAllocator:
                         f"Trapped longs liquidating with ADX {adx:.1f}. High conviction Short."
                     )
                     checklist["setup_trigger"] = True
-                elif live_px >= btc_dh and trend == "bullish":
+                elif live_px >= btc_dh and trend == "bullish" and adx >= 24.0:
                     side = "long"
                     score = 62.0
                     reason = "forced_liquidation_breakout_long"
@@ -462,9 +461,9 @@ class StrategyAllocator:
 
         # Archetype 4: Liquidity Sweep Mean Revert (Bollinger & RSI Sweep)
         else:  # mean_revert
-            sl_mult = 1.2
-            be_r = 0.8
-            partial_r = 1.5
+            sl_mult = 2.2
+            be_r = 1.5
+            partial_r = 2.0
             math_rules = {
                 "entry_rule": "Long: Price <= Lower BB & RSI <= 35; Short: Price >= Upper BB & RSI >= 65",
                 "oscillator_filter": "RSI extreme exhaustion (<= 35 oversold / >= 65 overbought)",
@@ -483,17 +482,28 @@ class StrategyAllocator:
             }
 
             if asset == "EURUSD":
-                if live_px <= low and rsi <= 38.0:
+                now_utc = datetime.now(timezone.utc)
+                eur_in_session = 7 <= now_utc.hour < 17 and now_utc.weekday() < 5
+                is_trending = adx >= 24.0
+                if check_market_hours and not eur_in_session and side_override is None:
+                    score = 45.0
+                    reason = "eur_off_hours_suppressed"
+                    tech_analysis = f"EURUSD outside London/NY active cash session ({now_utc.hour:02d}:00 UTC). Mean reversion suspended against illiquid Asian chop."
+                elif is_trending and side_override is None:
+                    score = 45.0
+                    reason = "eur_trending_no_revert"
+                    tech_analysis = f"EURUSD is in a strong trend (ADX {adx:.1f} >= 24.0). Mean reversion suspended to avoid counter-trend losses."
+                elif live_px <= low and rsi <= 38.0:
                     side = "long"
                     score = 58.0
                     reason = "eur_oversold_sweep_long"
-                    tech_analysis = f"EURUSD swept below lower band ({low:.5f}) with RSI {rsi:.1f}. Mean reversion Long active."
+                    tech_analysis = f"EURUSD swept below lower band ({low:.5f}) with RSI {rsi:.1f} in ranging regime (ADX {adx:.1f}). Mean reversion Long active."
                     checklist["setup_trigger"] = True
                 elif live_px >= up and rsi >= 62.0:
                     side = "short"
                     score = 58.0
                     reason = "eur_overbought_sweep_short"
-                    tech_analysis = f"EURUSD swept above upper band ({up:.5f}) with RSI {rsi:.1f}. Mean reversion Short active."
+                    tech_analysis = f"EURUSD swept above upper band ({up:.5f}) with RSI {rsi:.1f} in ranging regime (ADX {adx:.1f}). Mean reversion Short active."
                     checklist["setup_trigger"] = True
                 else:
                     score = 50.0

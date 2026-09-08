@@ -124,6 +124,11 @@ class TradeMemory:
             exp.reward,
             exp.realized_pnl,
         )
+        try:
+            from core.rl.trade_learner import rl_policy
+            rl_policy.learn_from_trade(exp)
+        except Exception as e:
+            logger.debug("Failed notifying RL policy from record_exit: %s", e)
         return exp
 
     def get_recent(self, n: int = 50) -> list[TradeExperience]:

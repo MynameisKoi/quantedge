@@ -85,6 +85,16 @@ SCHEDULED_WINDOWS: list[MarketEventWindow] = [
         blackout_before_min=0,
         blackout_after_min=0,
     ),
+    # 00:00 UTC — Midnight Execution Audit & RL Learning Agent (Daily 24/7)
+    MarketEventWindow(
+        name="midnight_learning_audit",
+        target_time=time(0, 0),
+        window_minutes=20,
+        days_of_week=[0, 1, 2, 3, 4, 5, 6],
+        high_impact=False,
+        blackout_before_min=0,
+        blackout_after_min=0,
+    ),
 ]
 
 

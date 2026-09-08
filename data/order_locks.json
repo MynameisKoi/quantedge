@@ -1,9 +1,30 @@
 {
   "BTCUSD": {
-    "timestamp": 1788653093.9209619,
-    "time_iso": "2026-09-06T00:04:53.920964+00:00",
-    "ticket": "201208143",
-    "side": "short",
+    "timestamp": 1788834645.0405715,
+    "time_iso": "2026-09-08T02:30:45.040573+00:00",
+    "ticket": "201367906",
+    "side": "long",
     "asset": "BTCUSD"
+  },
+  "XAUUSD": {
+    "timestamp": 1788855046.7924824,
+    "time_iso": "2026-09-08T08:10:46.792486+00:00",
+    "ticket": "201405007",
+    "side": "short",
+    "asset": "XAUUSD"
+  },
+  "USOIL": {
+    "timestamp": 1788898501.9696896,
+    "time_iso": "2026-09-08T20:15:01.969692+00:00",
+    "ticket": "201489581",
+    "side": "long",
+    "asset": "USOIL"
+  },
+  "EURUSD": {
+    "timestamp": 1788858168.3016775,
+    "time_iso": "2026-09-08T09:02:48.301682+00:00",
+    "ticket": "201409997",
+    "side": "short",
+    "asset": "EURUSD"
   }
 }

@@ -179,6 +179,11 @@ async def test_trailing_profit_giveback_protection():
     )
     portfolio.open_position(pos)
 
+    # Mock live quote so current price is precisely +0.5R above entry (79,100)
+    from data.feeds.live_price_feed import live_price_feed
+    orig_quotes = live_price_feed.get_live_quotes
+    live_price_feed.get_live_quotes = lambda: {"BTCUSD": {"bid": 79100.0, "ask": 79100.0}}
+
     # Order aged 1200s (past breathing window)
     order_lifecycle_agent._ticket_first_seen["777002"] = now_ts - 1200.0
     # Peak MFE reached +1.8R, but current price pulled back to +0.5R (< 50% of peak)
@@ -194,6 +199,7 @@ async def test_trailing_profit_giveback_protection():
         portfolio.positions.clear()
         order_lifecycle_agent._ticket_first_seen.pop("777002", None)
         order_lifecycle_agent._ticket_mfe.pop("777002", None)
+        live_price_feed.get_live_quotes = orig_quotes
 
 
 def test_session_aware_breathing_window_scaling():

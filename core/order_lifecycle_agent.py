@@ -401,7 +401,7 @@ class OrderLifecycleAgent:
         """Return remaining post-loss cooldown in seconds (0.0 if not in cooldown)."""
         canon = asset.upper().rstrip("M")
         last_loss = self._post_loss_cooldown.get(canon, 0.0)
-        cooldown_duration = 3600.0  # 60 minutes post-loss cooldown
+        cooldown_duration = 5400.0 if canon in ("BTCUSD", "EURUSD") else 3600.0  # 90 mins for BTC/EUR, 60 mins for others
         elapsed = time.time() - last_loss
         if elapsed < cooldown_duration:
             return cooldown_duration - elapsed
@@ -437,9 +437,10 @@ class OrderLifecycleAgent:
                 pnl = float(pos_analysis.get("unrealized_pnl", 0.0))
                 if target_action in ("CLOSE_DEFENSIVE", "CLOSE_ALPHA_DECAY") or pnl < 0 or r_mult < 0:
                     self._post_loss_cooldown[canon_asset] = time.time()
+                    duration_min = 90 if canon_asset in ("BTCUSD", "EURUSD") else 60
                     logger.warning(
-                        "[Post-Loss Cooldown] Set 60-min re-entry lockout on %s after losing exit (%s, PnL: $%.2f, R: %.2f)",
-                        canon_asset, target_action, pnl, r_mult
+                        "[Post-Loss Cooldown] Set %d-min re-entry lockout on %s after losing exit (%s, PnL: $%.2f, R: %.2f)",
+                        duration_min, canon_asset, target_action, pnl, r_mult
                     )
 
             return {

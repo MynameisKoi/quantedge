@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import json
 import logging
+from datetime import datetime, timezone
+from pathlib import Path
 import random
 from typing import Any
 
@@ -28,16 +31,19 @@ class TradeRLPolicy:
         self,
         learning_rate: float | None = None,
         exploration_rate: float | None = None,
+        policy_file: str | Path | None = None,
     ) -> None:
         self.alpha = learning_rate or settings.rl_learning_rate
         self.epsilon = exploration_rate or settings.rl_exploration_rate
+        self.policy_file = Path(policy_file or "data/rl_policy_state.json")
         # Q-table: state_key -> {action: q_value}
         self.q_table: dict[str, dict[str, float]] = {}
         self.action_counts: dict[str, dict[str, int]] = {}
         # Strategy selection Q-table: state_key -> {archetype: q_value}
         self.strategy_q_table: dict[str, dict[str, float]] = {}
         self.strategy_counts: dict[str, dict[str, int]] = {}
-        self._bootstrap_from_memory()
+        if not self.load_policy():
+            self._bootstrap_from_memory()
 
     def build_strategy_state_key(
         self,
@@ -148,6 +154,7 @@ class TradeRLPolicy:
             if arch != optimal_archetype:
                 q_vals[arch] = round(q_vals[arch] - (self.alpha * 0.2), 4)
 
+        self.save_policy()
         logger.info(
             "RL Policy Adapted from Missed Opportunity: state=%s boosted=%s (+%.2f) new_Q=%.3f",
             state_key,
@@ -239,6 +246,74 @@ class TradeRLPolicy:
             "reasoning": reasoning,
         }
 
+    def save_policy(self) -> None:
+        """Persist learned Q-tables and sample counts to disk."""
+        try:
+            self.policy_file.parent.mkdir(parents=True, exist_ok=True)
+            data = {
+                "q_table": self.q_table,
+                "action_counts": self.action_counts,
+                "strategy_q_table": self.strategy_q_table,
+                "strategy_counts": self.strategy_counts,
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            }
+            with open(self.policy_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2)
+        except Exception as e:
+            logger.warning("Failed saving RL policy: %s", e)
+
+    def load_policy(self) -> bool:
+        """Load persisted Q-tables from disk if available."""
+        if not self.policy_file.exists():
+            return False
+        try:
+            with open(self.policy_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self.q_table = data.get("q_table", {})
+            self.action_counts = data.get("action_counts", {})
+            self.strategy_q_table = data.get("strategy_q_table", {})
+            self.strategy_counts = data.get("strategy_counts", {})
+            if self.q_table or self.strategy_q_table:
+                logger.info("Loaded persisted RL policy: %d action states, %d strategy states", len(self.q_table), len(self.strategy_q_table))
+                return True
+            return False
+        except Exception as e:
+            logger.warning("Failed loading persisted RL policy: %s", e)
+            return False
+
+    def learn_from_strategy_outcome(
+        self,
+        asset: str,
+        regime: str,
+        adx: float,
+        atr_pct: float,
+        archetype: str,
+        reward: float,
+    ) -> None:
+        """Directly update the strategy archetype Contextual Bandit from a realized trade outcome."""
+        if not settings.rl_enabled or archetype not in STRATEGY_ARCHETYPES:
+            return
+
+        state_key = self.build_strategy_state_key(asset, regime, adx, atr_pct)
+        q_vals = self._get_strategy_q_values(state_key, adx=adx)
+        old_q = q_vals.get(archetype, 0.0)
+
+        # Bandit temporal difference update: Q(s,a) = Q(s,a) + alpha * (reward - Q(s,a))
+        new_q = old_q + self.alpha * (reward - old_q)
+        q_vals[archetype] = round(new_q, 4)
+        self.strategy_counts[state_key][archetype] = self.strategy_counts[state_key].get(archetype, 0) + 1
+
+        self.save_policy()
+        logger.info(
+            "RL Strategy Q-Table Updated: state=%s archetype=%s reward=%.3f old_Q=%.3f new_Q=%.3f (samples=%d)",
+            state_key,
+            archetype,
+            reward,
+            old_q,
+            new_q,
+            self.strategy_counts[state_key][archetype],
+        )
+
     def learn_from_trade(self, experience: TradeExperience) -> None:
         """Update Q-values from completed trade outcome."""
         if not settings.rl_enabled or not experience.closed:
@@ -256,6 +331,21 @@ class TradeRLPolicy:
         q_values[action] = round(new_q, 4)
         self.action_counts[state_key][action] = self.action_counts[state_key].get(action, 0) + 1
 
+        # Also update strategy archetype Q-table if state_key or strategy corresponds to archetype
+        matched_archetype = None
+        for a in STRATEGY_ARCHETYPES:
+            if a in state_key or a in (experience.strategy or ""):
+                matched_archetype = a
+                break
+        if matched_archetype:
+            strat_state_key = self.build_strategy_state_key(experience.asset, "risk-on", 24.0, 0.005)
+            sq_vals = self._get_strategy_q_values(strat_state_key)
+            old_sq = sq_vals.get(matched_archetype, 0.0)
+            new_sq = old_sq + self.alpha * (reward - old_sq)
+            sq_vals[matched_archetype] = round(new_sq, 4)
+            self.strategy_counts[strat_state_key][matched_archetype] = self.strategy_counts[strat_state_key].get(matched_archetype, 0) + 1
+
+        self.save_policy()
         logger.info(
             "RL Policy Updated: state=%s action=%s reward=%.3f old_Q=%.3f new_Q=%.3f (samples=%d)",
             state_key,
@@ -267,18 +357,40 @@ class TradeRLPolicy:
         )
 
     def _bootstrap_from_memory(self) -> None:
-        """Replay loaded memory on startup to reconstruct policy table."""
+        """Replay loaded memory and MT4 history on startup to reconstruct policy table."""
         for exp in trade_memory.experiences:
             if exp.closed:
                 self.learn_from_trade(exp)
-        if self.q_table:
-            logger.info("RL Policy bootstrapped with %d state representations", len(self.q_table))
+
+        # Also bootstrap strategy Q-table from historical MT4 closed trades if strategy_q_table is empty
+        try:
+            from execution.bridge.mt4_history_parser import mt4_history_parser
+            closed_trades = mt4_history_parser.parse_closed_trades(days_back=14)
+            for ct in closed_trades:
+                pnl = float(ct.get("pnl", 0.0))
+                sym = ct.get("symbol", "XAUUSD")
+                reward = 2.0 if pnl > 0 else -1.0
+                arch = "volatility_breakout" if sym in ("USOIL", "BTCUSD") else "value_pullback"
+                strat_state = self.build_strategy_state_key(sym, "risk-on", 24.0, 0.005)
+                sq = self._get_strategy_q_values(strat_state)
+                old_q = sq.get(arch, 0.0)
+                sq[arch] = round(old_q + self.alpha * (reward - old_q), 4)
+                self.strategy_counts[strat_state][arch] = self.strategy_counts[strat_state].get(arch, 0) + 1
+        except Exception as e:
+            logger.debug("MT4 history bootstrap skipped: %s", e)
+
+        self.save_policy()
+        if self.q_table or self.strategy_q_table:
+            logger.info("RL Policy bootstrapped: %d action states, %d strategy states", len(self.q_table), len(self.strategy_q_table))
 
     def get_policy_summary(self) -> dict[str, Any]:
         return {
             "total_states": len(self.q_table),
+            "total_strategy_states": len(self.strategy_q_table),
             "learning_rate": self.alpha,
             "exploration_rate": self.epsilon,
+            "strategy_q_table": self.strategy_q_table,
+            "strategy_counts": self.strategy_counts,
             "memory_stats": trade_memory.summary(),
             "top_positive_states": sorted(
                 [

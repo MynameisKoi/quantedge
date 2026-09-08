@@ -26,10 +26,10 @@ class UsOilAdaptiveStrategy:
     asset = "USOIL"
 
     def __init__(self) -> None:
-        self.sl_atr_mult = 2.0
-        self.be_r = 1.2
-        self.partial_r = 2.0
-        self.trail_atr_mult = 2.5
+        self.sl_atr_mult = 2.5
+        self.be_r = 1.5
+        self.partial_r = 2.5
+        self.trail_atr_mult = 2.8
 
     def evaluate(
         self,

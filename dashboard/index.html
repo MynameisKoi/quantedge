@@ -51,6 +51,11 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           <span>Daily Reports</span>
         </a>
+        <a href="#quantedge" class="nav-item" id="nav-quantedge" onclick="switchTab('quantedge')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <span>QuantEdge Deliberations</span>
+          <span class="badge" id="quantedge-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">0</span>
+        </a>
         <a href="#observability" class="nav-item" id="nav-observability" onclick="switchTab('observability')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
           <span>Model Observability</span>
@@ -218,7 +223,7 @@
                 <div class="stat-val" id="ov-score-XAUUSD">50.0 / 65</div>
               </div>
               <div class="stat-col">
-                <label>Today Win Rate</label>
+                <label>Win Rate (MT4)</label>
                 <div class="stat-val" id="ov-winrate-XAUUSD" style="color: #94a3b8;">0.0%</div>
               </div>
               <div class="stat-col">
@@ -252,7 +257,7 @@
                 <div class="stat-val" id="ov-score-USOIL">50.0 / 65</div>
               </div>
               <div class="stat-col">
-                <label>Today Win Rate</label>
+                <label>Win Rate (MT4)</label>
                 <div class="stat-val" id="ov-winrate-USOIL" style="color: #94a3b8;">0.0%</div>
               </div>
               <div class="stat-col">
@@ -286,7 +291,7 @@
                 <div class="stat-val" id="ov-score-EURUSD">50.0 / 65</div>
               </div>
               <div class="stat-col">
-                <label>Today Win Rate</label>
+                <label>Win Rate (MT4)</label>
                 <div class="stat-val" id="ov-winrate-EURUSD" style="color: #94a3b8;">0.0%</div>
               </div>
               <div class="stat-col">
@@ -320,7 +325,7 @@
                 <div class="stat-val" id="ov-score-BTCUSD">50.0 / 65</div>
               </div>
               <div class="stat-col">
-                <label>Today Win Rate</label>
+                <label>Win Rate (MT4)</label>
                 <div class="stat-val" id="ov-winrate-BTCUSD" style="color: #94a3b8;">0.0%</div>
               </div>
               <div class="stat-col">
@@ -328,6 +333,246 @@
                 <div class="stat-val" id="ov-pnl-BTCUSD">$0.00</div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Live Multi-Agent Execution Deliberations & Consensus Feed -->
+        <div class="panel-card" style="margin-top: 24px; border: 1px solid rgba(99, 102, 241, 0.3); background: rgba(15, 23, 42, 0.75);">
+          <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 20px;">🛡️</span>
+                <h3 style="margin: 0; font-size: 16px; font-weight: 700; color: #f8fafc;">
+                  Live Execution Deliberations: How Agents Agree to Order
+                </h3>
+              </div>
+              <p class="panel-sub" style="margin-top: 4px;">
+                Forensic transcript of the 5-agent deliberation council (RegimePM, Claude Haiku 4.5 Specialist, LiquidityAgent, TechnicalReasoner, RiskGuard) and how ensemble consensus was formed.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <span class="card-chip positive" id="ov-deliberation-count-chip">138 Trades Deliberated</span>
+              <button class="btn btn-secondary" onclick="switchTab('quantedge')" style="padding: 6px 12px; font-size: 12px; background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35); cursor: pointer; border-radius: 6px;">
+                View All Deliberations & Audit Tab →
+              </button>
+            </div>
+          </div>
+
+          <!-- 5-Agent Consensus Decision Protocol & 20-Point Grading Rubric Visualizer -->
+          <div style="margin: 16px 0; padding: 16px 20px; border-radius: 10px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(99, 102, 241, 0.35);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #f1f5f9; margin: 0; display: flex; align-items: center; gap: 8px;">
+                  <span>🧠</span> 5-Agent Council Grading Rubric (20 Pts Each / 100 Pts Total)
+                </h4>
+                <div style="font-size: 11px; color: #94a3b8; margin-top: 3px;">
+                  Every order is evaluated across 5 specialized gates. Execution requires <strong style="color: #10b981;">Score ≥ 65.0 pts</strong> + <strong>RiskGuard Zero-Veto Clearance</strong>.
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span class="card-chip positive" style="font-weight: 700; font-size: 11px;">Quorum: ≥ 65.0 pts</span>
+                <button class="btn btn-sm" id="btn-toggle-rubric-overview" onclick="toggleGradingRubric('overview')" style="background: rgba(99, 102, 241, 0.18); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); padding: 5px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;">
+                  📋 View Full 20-Pt Criteria Matrix ▾
+                </button>
+              </div>
+            </div>
+
+            <!-- 5 Agent Core Cards with Exact Sub-Criteria Points -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+              <!-- Agent 1: RegimePM -->
+              <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <div style="font-size: 12px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 6px;">
+                    <span>👤</span> 1. RegimePM
+                  </div>
+                  <span class="card-chip positive" style="font-size: 10px; padding: 2px 6px;">20 pts max</span>
+                </div>
+                <div style="font-size: 11px; color: #818cf8; font-weight: 600; margin-bottom: 6px;">Global Macro Lead</div>
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 10px; color: #94a3b8;">
+                  <div style="display: flex; justify-content: space-between;"><span>• Macro Cycle Alignment</span><strong style="color: #10b981;">+8 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• 10Y Yield & USD Vector</span><strong style="color: #10b981;">+6 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• Confidence Score (≥85%)</span><strong style="color: #10b981;">+6 pts</strong></div>
+                </div>
+              </div>
+
+              <!-- Agent 2: Claude Haiku 4.5 -->
+              <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <div style="font-size: 12px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 6px;">
+                    <span>🤖</span> 2. Claude Haiku 4.5
+                  </div>
+                  <span class="card-chip positive" style="font-size: 10px; padding: 2px 6px;">20 pts max</span>
+                </div>
+                <div style="font-size: 11px; color: #818cf8; font-weight: 600; margin-bottom: 6px;">Asset Specialist (LLM)</div>
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 10px; color: #94a3b8;">
+                  <div style="display: flex; justify-content: space-between;"><span>• Sentiment Stance (Bull/Bear)</span><strong style="color: #10b981;">+8 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• Black Swan Event Blackout</span><strong style="color: #10b981;">+7 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• Asymmetry Quality Edge</span><strong style="color: #10b981;">+5 pts</strong></div>
+                </div>
+              </div>
+
+              <!-- Agent 3: LiquidityAgent -->
+              <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <div style="font-size: 12px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 6px;">
+                    <span>💧</span> 3. LiquidityAgent
+                  </div>
+                  <span class="card-chip positive" style="font-size: 10px; padding: 2px 6px;">20 pts max</span>
+                </div>
+                <div style="font-size: 11px; color: #818cf8; font-weight: 600; margin-bottom: 6px;">Order Flow & Depth</div>
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 10px; color: #94a3b8;">
+                  <div style="display: flex; justify-content: space-between;"><span>• Broker Spread Tolerance</span><strong style="color: #10b981;">+8 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• London/NY Overlap Depth</span><strong style="color: #10b981;">+6 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• Order Book Slippage Guard</span><strong style="color: #10b981;">+6 pts</strong></div>
+                </div>
+              </div>
+
+              <!-- Agent 4: TechnicalReasoner -->
+              <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <div style="font-size: 12px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 6px;">
+                    <span>📐</span> 4. TechnicalReasoner
+                  </div>
+                  <span class="card-chip positive" style="font-size: 10px; padding: 2px 6px;">20 pts max</span>
+                </div>
+                <div style="font-size: 11px; color: #818cf8; font-weight: 600; margin-bottom: 6px;">MT4 Price Geometry</div>
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 10px; color: #94a3b8;">
+                  <div style="display: flex; justify-content: space-between;"><span>• Strategy Setup Trigger</span><strong style="color: #10b981;">+8 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• ADX Expansion (≥25.0)</span><strong style="color: #10b981;">+6 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• Multi-TF HH/HL Structure</span><strong style="color: #10b981;">+6 pts</strong></div>
+                </div>
+              </div>
+
+              <!-- Agent 5: RiskGuard -->
+              <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <div style="font-size: 12px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 6px;">
+                    <span>🛡️</span> 5. RiskGuard
+                  </div>
+                  <span class="card-chip positive" style="font-size: 10px; padding: 2px 6px;">20 pts + VETO</span>
+                </div>
+                <div style="font-size: 11px; color: #818cf8; font-weight: 600; margin-bottom: 6px;">Capital Preservation</div>
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 10px; color: #94a3b8;">
+                  <div style="display: flex; justify-content: space-between;"><span>• 1% Equity Sizing Model</span><strong style="color: #10b981;">+7 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• Dynamic ATR Stop (≥1.8x)</span><strong style="color: #10b981;">+7 pts</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span>• R:R ≥ +2R & BE Lock</span><strong style="color: #10b981;">+6 pts</strong></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Criteria Matrix (Expandable) -->
+            <div id="rubric-details-overview" style="display: none; margin-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 16px;">
+              <h5 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #cbd5e1; margin-bottom: 10px;">
+                📖 Detailed Point Evaluation Rules & Institutional Grading Thresholds
+              </h5>
+              <div class="table-responsive">
+                <table class="data-table" style="font-size: 11px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 140px;">Council Member</th>
+                      <th style="width: 140px;">Sub-Criteria (Pts)</th>
+                      <th>Evaluation Mechanics & Live Thresholds</th>
+                      <th style="width: 180px;">Deduction / Veto Rules</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong style="color: #f1f5f9;">1. RegimePM</strong><div style="font-size: 10px; color: #94a3b8;">Global Macro Lead</div></td>
+                      <td>
+                        <div>• Cycle Align: <strong>+8 pts</strong></div>
+                        <div>• 10Y Yield/USD: <strong>+6 pts</strong></div>
+                        <div>• Confidence: <strong>+6 pts</strong></div>
+                      </td>
+                      <td style="color: #cbd5e1; line-height: 1.4;">
+                        Evaluates macro regime (`risk-on`, `risk-off`, `stagflation`, `deflation`). Checks 10-Year Treasury Yield vector and DXY inflow tailwind. Requires macro confidence ≥ 80% for full points.
+                      </td>
+                      <td style="color: #f87171;">
+                        -8 pts if order opposes macro cycle; -6 pts if currency vector forms severe headwind.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong style="color: #f1f5f9;">2. Claude Haiku 4.5</strong><div style="font-size: 10px; color: #94a3b8;">Asset Specialist</div></td>
+                      <td>
+                        <div>• Sentiment: <strong>+8 pts</strong></div>
+                        <div>• News Blackout: <strong>+7 pts</strong></div>
+                        <div>• Asymmetry: <strong>+5 pts</strong></div>
+                      </td>
+                      <td style="color: #cbd5e1; line-height: 1.4;">
+                        LLM parses asset headlines into `BULLISH` (+8), `NEUTRAL` (bias ≥ -0.15 for long / ≤ +0.15 for short = +6). Scans calendar to ensure 0 Tier-1 catalysts (FOMC/CPI/NFP/OPEC) within 45 mins.
+                      </td>
+                      <td style="color: #f87171;">
+                        0 pts & Dissent if conflicting stance. 0 pts on News Blackout if high-impact release &lt; 30 mins away.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong style="color: #f1f5f9;">3. LiquidityAgent</strong><div style="font-size: 10px; color: #94a3b8;">Order Flow & Depth</div></td>
+                      <td>
+                        <div>• Spread Limit: <strong>+8 pts</strong></div>
+                        <div>• Session Flow: <strong>+6 pts</strong></div>
+                        <div>• Slippage Guard: <strong>+6 pts</strong></div>
+                      </td>
+                      <td style="color: #cbd5e1; line-height: 1.4;">
+                        Samples live Exness broker spread vs ceilings: BTC ≤ $5 (8 pts), XAU ≤ $0.35 (8 pts), EUR ≤ 0.8 pips (8 pts), USOIL ≤ $0.04 (8 pts). Peak points during London/NY overlap (12:00-16:00 UTC).
+                      </td>
+                      <td style="color: #f87171;">
+                        0 pts if spread exceeds maximum limit. 1 pt in twilight session (21:00-23:00 UTC).
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong style="color: #f1f5f9;">4. TechnicalReasoner</strong><div style="font-size: 10px; color: #94a3b8;">MT4 Price Geometry</div></td>
+                      <td>
+                        <div>• Setup Trigger: <strong>+8 pts</strong></div>
+                        <div>• ADX Momentum: <strong>+6 pts</strong></div>
+                        <div>• Multi-TF HH/HL: <strong>+6 pts</strong></div>
+                      </td>
+                      <td style="color: #cbd5e1; line-height: 1.4;">
+                        Verifies active candle setup: Donchian 20 breakout, 20/50 EMA pullback tap, or RSI sweep (&lt;35 / &gt;65). Requires ADX ≥ 25.0 with 9/21 EMA expansion. Confirms higher timeframe alignment.
+                      </td>
+                      <td style="color: #f87171;">
+                        0 pts if price is floating inside consolidation (`WAITING_SETUP` $\to$ Dissent).
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong style="color: #f1f5f9;">5. RiskGuard</strong><div style="font-size: 10px; color: #94a3b8;">Capital Preservation</div></td>
+                      <td>
+                        <div>• 1% Risk Size: <strong>+7 pts</strong></div>
+                        <div>• Stop Floor: <strong>+7 pts</strong></div>
+                        <div>• R:R & BE Lock: <strong>+6 pts</strong></div>
+                      </td>
+                      <td style="color: #cbd5e1; line-height: 1.4;">
+                        Calculates volume dynamically for exactly 1.0% equity dollar risk. Mandates stop loss ≥ 1.8x - 2.5x ATR beyond market noise. Enforces Take Profit ≥ +2.0R with automated +1.5R breakeven lock.
+                      </td>
+                      <td style="color: #ef4444; font-weight: 700;">
+                        HARD VETO: Daily equity drawdown &gt; 5% or tight stops (&lt;1.0x ATR) aborts trade instantly.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Deliberations Feed Table -->
+          <div class="table-responsive">
+            <table class="data-table" id="table-ov-deliberations">
+              <thead>
+                <tr>
+                  <th>Ticket</th>
+                  <th>Time (UTC)</th>
+                  <th>Asset</th>
+                  <th>Side</th>
+                  <th>Entry Price</th>
+                  <th>Stop Loss</th>
+                  <th>Take Profit</th>
+                  <th>Outcome (MT4)</th>
+                  <th>Agent Consensus</th>
+                  <th>Deliberation</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-ov-deliberations">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -868,6 +1113,269 @@
           </div>
         </div>
       </section>
+
+      <!-- TAB 7: QUANTEDGE EXECUTION REVIEW & 00:00 UTC LEARNING AGENT -->
+      <section class="tab-pane" id="pane-quantedge">
+        <div class="panel-header-custom" style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 style="font-size: 20px; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 10px;">
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #10b981;">🛡️</span>
+                QuantEdge Execution Review & Multi-Agent Deliberations
+              </h2>
+              <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">
+                Learn from past 24h trade executions: review live agent debates (RegimePM, Claude Haiku 4.5 Specialist, LiquidityAgent, TechnicalReasoner, RiskGuard), why orders were fired, and post-mortem outcome analysis.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button class="btn btn-primary" id="btn-run-midnight-audit" onclick="runMidnightAudit()" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <span>⚡</span> Run 00:00 UTC Audit Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time Institutional Performance Strip -->
+        <div class="metrics-grid" style="margin-bottom: 24px;">
+          <div class="metric-card winrate-card">
+            <div class="card-header">
+              <span class="card-title">Real Win Rate (MT4)</span>
+              <span class="card-chip">Ground Truth</span>
+            </div>
+            <div class="card-value" id="qe-val-win-rate">--%</div>
+            <div class="card-footer">
+              <span id="qe-val-win-loss-count">-- Wins / -- Losses</span>
+            </div>
+          </div>
+
+          <div class="metric-card pnl-card">
+            <div class="card-header">
+              <span class="card-title">Net Realized PnL</span>
+              <span class="trend-badge positive" id="qe-val-pnl-trend">Exness</span>
+            </div>
+            <div class="card-value" id="qe-val-net-pnl">$0.00</div>
+            <div class="card-footer">
+              <span>Gross: <strong id="qe-val-gross-profit">$0.00</strong></span>
+              <span>Loss: <strong id="qe-val-gross-loss">$0.00</strong></span>
+            </div>
+          </div>
+
+          <div class="metric-card factor-card">
+            <div class="card-header">
+              <span class="card-title">Profit Factor</span>
+              <span class="card-chip">Asymmetry</span>
+            </div>
+            <div class="card-value" id="qe-val-profit-factor">0.00</div>
+            <div class="card-footer">
+              <span>Avg Win: <strong id="qe-val-avg-win">$0.00</strong></span>
+              <span>Loss: <strong id="qe-val-avg-loss">$0.00</strong></span>
+            </div>
+          </div>
+
+          <div class="metric-card balance-card">
+            <div class="card-header">
+              <span class="card-title">Max Drawdown</span>
+              <span class="card-chip negative">High Water Mark</span>
+            </div>
+            <div class="card-value" id="qe-val-max-dd" style="color: #f87171;">--%</div>
+            <div class="card-footer">
+              <span id="qe-val-total-trades">Total Executions: --</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 00:00 UTC Midnight Learning Agent Card -->
+        <div class="panel-card" style="margin-bottom: 24px; border: 1px solid rgba(99, 102, 241, 0.3); background: rgba(15, 23, 42, 0.7);">
+          <div class="card-header" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 18px;">🌙</span>
+                <div>
+                  <h3 style="font-size: 15px; font-weight: 700; color: #e2e8f0; margin: 0;">
+                    00:00 UTC Midnight Learning Agent — Post-Mortem Audit
+                  </h3>
+                  <p style="font-size: 12px; color: var(--text-muted); margin: 2px 0 0 0;" id="midnight-audit-date">
+                    Audit Date: Loading...
+                  </p>
+                </div>
+              </div>
+              <span class="card-chip positive" id="midnight-audit-status">Scheduled 00:00 UTC Active</span>
+            </div>
+          </div>
+
+          <!-- Agent Accuracy Grid -->
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 10px;">
+              Multi-Agent Accuracy & Accuracy Grades
+            </h4>
+            <div class="agent-accuracy-grid" id="midnight-agent-accuracy-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Institutional Takeaways -->
+          <div>
+            <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 10px;">
+              Forensic Lessons & Policy Adjustments
+            </h4>
+            <div id="midnight-takeaways-container" style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 5-Agent Council Grading Rubric Matrix Reference Card -->
+        <div class="panel-card" style="margin-bottom: 24px; border: 1px solid rgba(99, 102, 241, 0.35); background: rgba(15, 23, 42, 0.75);">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <h3 style="font-size: 16px; font-weight: 700; color: #f8fafc; margin: 0; display: flex; align-items: center; gap: 8px;">
+                <span>⚖️</span> Institutional 5-Agent Council Grading Rubric (20 Pts Each / 100 Pts Total)
+              </h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+                Mathematical criteria and threshold matrix used by the 5-agent council to deliberate, score, and agree on live MT4 order execution.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span class="card-chip positive" style="font-size: 11px;">Quorum: ≥ 65.0 pts</span>
+              <span class="card-chip positive" style="font-size: 11px;">Zero Veto Required</span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" style="font-size: 11px;">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">Council Member</th>
+                  <th style="width: 140px;">Sub-Criteria (Pts)</th>
+                  <th>Evaluation Mechanics & Live Thresholds</th>
+                  <th style="width: 180px;">Deduction / Veto Rules</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: #f1f5f9;">1. RegimePM</strong><div style="font-size: 10px; color: #94a3b8;">Global Macro Lead</div></td>
+                  <td>
+                    <div>• Cycle Align: <strong>+8 pts</strong></div>
+                    <div>• 10Y Yield/USD: <strong>+6 pts</strong></div>
+                    <div>• Confidence: <strong>+6 pts</strong></div>
+                  </td>
+                  <td style="color: #cbd5e1; line-height: 1.4;">
+                    Evaluates macro regime (`risk-on`, `risk-off`, `stagflation`, `deflation`). Checks 10-Year Treasury Yield vector and DXY inflow tailwind. Requires macro confidence ≥ 80% for full points.
+                  </td>
+                  <td style="color: #f87171;">
+                    -8 pts if order opposes macro cycle; -6 pts if currency vector forms severe headwind.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #f1f5f9;">2. Claude Haiku 4.5</strong><div style="font-size: 10px; color: #94a3b8;">Asset Specialist</div></td>
+                  <td>
+                    <div>• Sentiment: <strong>+8 pts</strong></div>
+                    <div>• News Blackout: <strong>+7 pts</strong></div>
+                    <div>• Asymmetry: <strong>+5 pts</strong></div>
+                  </td>
+                  <td style="color: #cbd5e1; line-height: 1.4;">
+                    LLM parses asset headlines into `BULLISH` (+8), `NEUTRAL` (bias ≥ -0.15 for long / ≤ +0.15 for short = +6). Scans calendar to ensure 0 Tier-1 catalysts (FOMC/CPI/NFP/OPEC) within 45 mins.
+                  </td>
+                  <td style="color: #f87171;">
+                    0 pts & Dissent if conflicting stance. 0 pts on News Blackout if high-impact release &lt; 30 mins away.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #f1f5f9;">3. LiquidityAgent</strong><div style="font-size: 10px; color: #94a3b8;">Order Flow & Depth</div></td>
+                  <td>
+                    <div>• Spread Limit: <strong>+8 pts</strong></div>
+                    <div>• Session Flow: <strong>+6 pts</strong></div>
+                    <div>• Slippage Guard: <strong>+6 pts</strong></div>
+                  </td>
+                  <td style="color: #cbd5e1; line-height: 1.4;">
+                    Samples live Exness broker spread vs ceilings: BTC ≤ $5 (8 pts), XAU ≤ $0.35 (8 pts), EUR ≤ 0.8 pips (8 pts), USOIL ≤ $0.04 (8 pts). Peak points during London/NY overlap (12:00-16:00 UTC).
+                  </td>
+                  <td style="color: #f87171;">
+                    0 pts if spread exceeds maximum limit. 1 pt in twilight session (21:00-23:00 UTC).
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #f1f5f9;">4. TechnicalReasoner</strong><div style="font-size: 10px; color: #94a3b8;">MT4 Price Geometry</div></td>
+                  <td>
+                    <div>• Setup Trigger: <strong>+8 pts</strong></div>
+                    <div>• ADX Momentum: <strong>+6 pts</strong></div>
+                    <div>• Multi-TF HH/HL: <strong>+6 pts</strong></div>
+                  </td>
+                  <td style="color: #cbd5e1; line-height: 1.4;">
+                    Verifies active candle setup: Donchian 20 breakout, 20/50 EMA pullback tap, or RSI sweep (&lt;35 / &gt;65). Requires ADX ≥ 25.0 with 9/21 EMA expansion. Confirms higher timeframe alignment.
+                  </td>
+                  <td style="color: #f87171;">
+                    0 pts if price is floating inside consolidation (`WAITING_SETUP` $\to$ Dissent).
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #f1f5f9;">5. RiskGuard</strong><div style="font-size: 10px; color: #94a3b8;">Capital Preservation</div></td>
+                  <td>
+                    <div>• 1% Risk Size: <strong>+7 pts</strong></div>
+                    <div>• Stop Floor: <strong>+7 pts</strong></div>
+                    <div>• R:R & BE Lock: <strong>+6 pts</strong></div>
+                  </td>
+                  <td style="color: #cbd5e1; line-height: 1.4;">
+                    Calculates volume dynamically for exactly 1.0% equity dollar risk. Mandates stop loss ≥ 1.8x - 2.5x ATR beyond market noise. Enforces Take Profit ≥ +2.0R with automated +1.5R breakeven lock.
+                  </td>
+                  <td style="color: #ef4444; font-weight: 700;">
+                    HARD VETO: Daily equity drawdown &gt; 5% or tight stops (&lt;1.0x ATR) aborts trade instantly.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- QuantEdge Executions History Table -->
+        <div class="panel-card">
+          <div class="card-header" style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 style="font-size: 16px; font-weight: 700; color: #f8fafc; margin: 0;">
+                Execution Deliberation Log
+              </h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+                Click any trade to review the full 5-agent debate, why it was fired, and post-mortem diagnosis.
+              </p>
+            </div>
+            <!-- Filter Pills -->
+            <div class="filter-pills-row" style="display: flex; gap: 8px;">
+              <button class="pill-filter active" data-asset="ALL" onclick="filterQuantEdge('ALL')">All Assets</button>
+              <button class="pill-filter" data-asset="XAUUSD" onclick="filterQuantEdge('XAUUSD')">XAUUSD</button>
+              <button class="pill-filter" data-asset="BTCUSD" onclick="filterQuantEdge('BTCUSD')">BTCUSD</button>
+              <button class="pill-filter" data-asset="USOIL" onclick="filterQuantEdge('USOIL')">USOIL</button>
+              <button class="pill-filter" data-asset="EURUSD" onclick="filterQuantEdge('EURUSD')">EURUSD</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" id="table-quantedge-executions">
+              <thead>
+                <tr>
+                  <th>Ticket</th>
+                  <th>Timestamp (UTC)</th>
+                  <th>Asset</th>
+                  <th>Side</th>
+                  <th>Lots</th>
+                  <th>Entry Price</th>
+                  <th>Stop Loss</th>
+                  <th>Take Profit</th>
+                  <th>Exit Price</th>
+                  <th>Outcome (PnL)</th>
+                  <th>Agent Consensus</th>
+                  <th>Deliberation</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-quantedge-executions">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
   <!-- Interactive Strategy Intelligence & Learning Modal -->
   <div class="modal-backdrop" id="modal-strategy-intel" style="display: none;" onclick="handleBackdropClick(event)">
     <div class="modal-container">
@@ -1012,6 +1520,143 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=2.5"></script>
+  <!-- QuantEdge 5-Agent Deliberation & Forensic Review Modal -->
+  <div class="modal-backdrop" id="modal-quantedge-deliberation" style="display: none;" onclick="if(event.target.id === 'modal-quantedge-deliberation') closeQuantEdgeModal()">
+    <div class="modal-container" style="max-width: 780px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="qe-modal-title" style="display: flex; align-items: center; gap: 10px;">
+            <span>🛡️</span> QuantEdge Multi-Agent Deliberation Review
+          </h3>
+          <p class="panel-sub" id="qe-modal-subtitle" style="margin-top: 4px; font-size: 12px; color: var(--text-muted);">
+            Forensic Transcript: 5-Agent Debate, Order Execution Rationale & MT4 Outcome
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="closeQuantEdgeModal()" title="Close">×</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Status & PnL Strip -->
+        <div id="qe-modal-pnl-strip" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="trend-badge positive" id="qe-m-badge">WIN</span>
+            <span style="font-weight: 700; color: #f8fafc;" id="qe-m-ticket-label">Ticket #--</span>
+          </div>
+          <div style="font-size: 16px; font-weight: 800;" id="qe-m-pnl-label">+$0.00</div>
+        </div>
+
+        <!-- Trade Specs Grid -->
+        <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px;">
+          <div class="stat-col"><label>Asset / Side</label><div class="stat-val" id="qe-m-asset-side">--</div></div>
+          <div class="stat-col"><label>Volume</label><div class="stat-val" id="qe-m-volume">-- Lots</div></div>
+          <div class="stat-col"><label>Entry Price</label><div class="stat-val" id="qe-m-entry">--</div></div>
+          <div class="stat-col"><label>Exit Price</label><div class="stat-val" id="qe-m-exit">--</div></div>
+          <div class="stat-col"><label>Stop Loss</label><div class="stat-val negative" id="qe-m-sl">--</div></div>
+          <div class="stat-col"><label>Take Profit</label><div class="stat-val positive" id="qe-m-tp">--</div></div>
+          <div class="stat-col"><label>Exit Reason</label><div class="stat-val" id="qe-m-exit-reason">--</div></div>
+          <div class="stat-col"><label>Consensus Score</label><div class="stat-val positive" id="qe-m-consensus">--</div></div>
+        </div>
+
+        <!-- How Agents Agreed to Execute Order (Council Voting Protocol) -->
+        <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 16px;">⚖️</span>
+              <strong style="font-size: 13px; color: #f1f5f9; text-transform: uppercase; letter-spacing: 0.05em;">How the 5 Agents Agreed to Execute This Order</strong>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span class="card-chip positive" id="qe-m-consensus-threshold-badge" style="font-size: 11px;">Consensus Threshold ≥ 65 Pts: PASSED</span>
+              <span class="card-chip positive" id="qe-m-riskguard-veto-badge" style="font-size: 11px;">RiskGuard Veto: NO VETO (APPROVED)</span>
+            </div>
+          </div>
+          <p style="font-size: 12px; line-height: 1.5; color: #94a3b8; margin: 0 0 12px 0;">
+            An order is strictly prevented from executing unless two mandatory institutional conditions are fulfilled:
+            <strong>(1)</strong> The 5-agent ensemble consensus score equals or exceeds <span style="color: #10b981; font-weight: 700;">65.0 / 100</span>, and
+            <strong>(2)</strong> <strong>RiskGuard</strong> validates that drawdown limits, spread buffers, and maximum 1% risk per trade are strictly respected.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px;" id="qe-m-vote-breakdown">
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 11px; color: #94a3b8;">1. Regime Lead</div>
+              <div style="font-size: 12px; font-weight: 700; color: #10b981; margin-top: 2px;" id="qe-m-score-regime">+18 / 20 pts</div>
+              <div style="font-size: 10px; color: #64748b;">Macro Aligned</div>
+            </div>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 11px; color: #94a3b8;">2. Claude Haiku</div>
+              <div style="font-size: 12px; font-weight: 700; color: #10b981; margin-top: 2px;" id="qe-m-score-haiku">+17 / 20 pts</div>
+              <div style="font-size: 10px; color: #64748b;">Sentiment Confirmed</div>
+            </div>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 11px; color: #94a3b8;">3. Liquidity Depth</div>
+              <div style="font-size: 12px; font-weight: 700; color: #10b981; margin-top: 2px;" id="qe-m-score-liquidity">+18 / 20 pts</div>
+              <div style="font-size: 10px; color: #64748b;">Tight Spread</div>
+            </div>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 11px; color: #94a3b8;">4. M15 Geometry</div>
+              <div style="font-size: 12px; font-weight: 700; color: #10b981; margin-top: 2px;" id="qe-m-score-technical">+18 / 20 pts</div>
+              <div style="font-size: 10px; color: #64748b;">Breakout Trigger</div>
+            </div>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="font-size: 11px; color: #94a3b8;">5. RiskGuard Sign-Off</div>
+              <div style="font-size: 12px; font-weight: 700; color: #10b981; margin-top: 2px;" id="qe-m-score-risk">+17 / 20 pts</div>
+              <div style="font-size: 10px; color: #64748b;">1% Equity Enforced</div>
+            </div>
+          </div>
+          <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+            <button class="btn btn-sm" id="btn-toggle-rubric-modal" onclick="toggleGradingRubric('modal')" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;">
+              🔍 View Detailed 20-Pt Criteria Breakdown ▾
+            </button>
+          </div>
+          <div id="rubric-details-modal" style="display: none; margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 12px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; font-size: 11px;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                <strong style="color: #f1f5f9;">1. RegimePM (20 pts)</strong>
+                <div style="font-size: 10px; color: #94a3b8; margin-top: 4px; line-height: 1.4;">• Macro Cycle Align: <strong>+8 pts</strong><br>• 10Y Yield/USD Vector: <strong>+6 pts</strong><br>• Confidence (≥85%): <strong>+6 pts</strong></div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                <strong style="color: #f1f5f9;">2. Claude Haiku 4.5 (20 pts)</strong>
+                <div style="font-size: 10px; color: #94a3b8; margin-top: 4px; line-height: 1.4;">• Sentiment Stance: <strong>+8 pts</strong><br>• Catalyst Blackout (&lt;45m): <strong>+7 pts</strong><br>• Asymmetry Quality: <strong>+5 pts</strong></div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                <strong style="color: #f1f5f9;">3. LiquidityAgent (20 pts)</strong>
+                <div style="font-size: 10px; color: #94a3b8; margin-top: 4px; line-height: 1.4;">• Broker Spread Ceilings: <strong>+8 pts</strong><br>• London/NY Overlap: <strong>+6 pts</strong><br>• Slippage Depth Guard: <strong>+6 pts</strong></div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                <strong style="color: #f1f5f9;">4. TechnicalReasoner (20 pts)</strong>
+                <div style="font-size: 10px; color: #94a3b8; margin-top: 4px; line-height: 1.4;">• M15 Setup Trigger: <strong>+8 pts</strong><br>• ADX Expansion (≥25): <strong>+6 pts</strong><br>• Multi-TF Structure: <strong>+6 pts</strong></div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                <strong style="color: #f1f5f9;">5. RiskGuard (20 pts + VETO)</strong>
+                <div style="font-size: 10px; color: #94a3b8; margin-top: 4px; line-height: 1.4;">• 1% Equity Sizing: <strong>+7 pts</strong><br>• ATR Stop (≥1.8x): <strong>+7 pts</strong><br>• R:R ≥ +2R & BE: <strong>+6 pts</strong><br><span style="color: #ef4444;">• Hard Veto: DD &gt; 5%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5-Agent Deliberation Transcript -->
+        <div style="margin-bottom: 20px;">
+          <h4 style="font-size: 13px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>💬</span> 5-Agent Consensus Deliberations (Why Order Was Fired)
+          </h4>
+          <div class="agent-deliberation-stream" id="qe-m-agent-deliberations" style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Forensic Post-Mortem & Institutional Lesson -->
+        <div class="edu-card" style="margin-bottom: 16px; border-color: rgba(99, 102, 241, 0.4); background: rgba(15, 23, 42, 0.8);">
+          <h4 style="font-size: 12px; color: #818cf8; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <span>🔬</span> POST-MORTEM & INVENTIVE LEARNING
+          </h4>
+          <p id="qe-m-post-mortem" style="font-size: 13px; line-height: 1.5; color: #cbd5e1;">--</p>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="btn btn-secondary" onclick="closeQuantEdgeModal()">Close Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=3.0"></script>
 </body>
 </html>

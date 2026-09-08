@@ -44,10 +44,10 @@ class XauUsdAdaptiveStrategy:
     asset = "XAUUSD"
 
     def __init__(self) -> None:
-        self.sl_atr_mult = 1.5
-        self.be_r = 1.0
-        self.partial_r = 2.0
-        self.trail_atr_mult = 2.0
+        self.sl_atr_mult = 2.5
+        self.be_r = 1.5
+        self.partial_r = 2.5
+        self.trail_atr_mult = 2.5
 
     def evaluate(
         self,

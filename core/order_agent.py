@@ -19,6 +19,7 @@ from typing import Any
 
 from config.settings import settings
 from core.portfolio import Position, portfolio
+from core.rl.quantedge_tracker import quantedge_tracker
 from core.rl.trade_memory import trade_memory
 from data.feeds.live_price_feed import live_price_feed
 from execution.bridge.facade import get_bridge
@@ -177,7 +178,25 @@ class OrderDecisionAgent:
                 "summary": alloc.get("consensus_summary", ""),
             }
 
-        # 4. Institutional 1% Risk Sizing Calculation
+        # Determine structural invalidation price beyond market structure
+        indicators = alloc.get("indicators", {})
+        structural_stop: float | None = None
+        if canonical_side == "long":
+            if "donchian_low" in indicators and float(indicators["donchian_low"]) > 0:
+                structural_stop = float(indicators["donchian_low"]) - 0.3 * atr
+            elif "bb_lower" in indicators and float(indicators["bb_lower"]) > 0:
+                structural_stop = float(indicators["bb_lower"]) - 0.3 * atr
+            elif "ema50" in indicators and float(indicators["ema50"]) > 0 and float(indicators["ema50"]) < exec_price:
+                structural_stop = float(indicators["ema50"]) - 0.5 * atr
+        else:
+            if "donchian_high" in indicators and float(indicators["donchian_high"]) > 0:
+                structural_stop = float(indicators["donchian_high"]) + 0.3 * atr
+            elif "bb_upper" in indicators and float(indicators["bb_upper"]) > 0:
+                structural_stop = float(indicators["bb_upper"]) + 0.3 * atr
+            elif "ema50" in indicators and float(indicators["ema50"]) > 0 and float(indicators["ema50"]) > exec_price:
+                structural_stop = float(indicators["ema50"]) + 0.5 * atr
+
+        # 4. Institutional 1% Risk Sizing Calculation with Structural Anchoring
         sizing = atr_position_size(
             price=exec_price,
             atr=atr,
@@ -185,6 +204,7 @@ class OrderDecisionAgent:
             atr_stop_mult=sl_mult,
             tp_r_mult=partial_r,
             be_r_mult=be_r,
+            structural_stop_price=structural_stop,
         )
 
         stop_loss = sizing["stop_loss_long"] if canonical_side == "long" else sizing["stop_loss_short"]
@@ -247,6 +267,8 @@ class OrderDecisionAgent:
             "strategy_name": alloc.get("strategy_name", "AdaptiveM15"),
             "strategy_archetype": archetype,
             "rationale": rationale,
+            "consensus": consensus,
+            "indicators": indicators,
             "timestamp": datetime.now(UTC).isoformat(),
         }
         return decision
@@ -299,9 +321,10 @@ class OrderDecisionAgent:
                     # Persist atomic order lock across processes
                     self._record_order_lock(canon_asset, str(ticket), decision["side"])
 
-                    # Record in Trade Memory
+                    # Record in Trade Memory with ticket as trade_id for precise close matching
+                    entry_trade_id = str(ticket) if str(ticket) not in ("0", "TICKET_PENDING", "") else f"{asset}_{datetime.now(UTC).timestamp()}"
                     trade_memory.record_entry(
-                        trade_id=f"{asset}_{datetime.now(UTC).timestamp()}",
+                        trade_id=entry_trade_id,
                         asset=asset,
                         strategy=decision["strategy_name"],
                         state_key=f"{asset}|{decision['strategy_archetype']}",
@@ -309,6 +332,25 @@ class OrderDecisionAgent:
                         side=decision["side"],
                         entry_price=fill_price,
                     )
+
+                    # Record in QuantEdge Multi-Agent Deliberation Tracker
+                    try:
+                        quantedge_tracker.record_order(
+                            ticket=str(ticket),
+                            asset=asset,
+                            side=decision["side"],
+                            volume=decision["volume"],
+                            price=fill_price,
+                            stop_loss=decision["stop_loss"],
+                            take_profit=decision["take_profit"],
+                            strategy_name=decision["strategy_name"],
+                            strategy_archetype=decision["strategy_archetype"],
+                            consensus=decision.get("consensus", {}),
+                            rationale=decision["rationale"],
+                            indicators=decision.get("indicators", {}),
+                        )
+                    except Exception as e:
+                        logger.warning("QuantEdge tracker record skipped: %s", e)
 
                     # LangSmith Telemetry Tracking
                     try:
