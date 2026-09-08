@@ -119,9 +119,9 @@ QuantEdge AI enforces a multi-agent deliberation committee (`macro/order_consens
 ### 5. Order Fine-Tuning & Strict Risk Gate (1% Rule)
 Before any order reaches the Exness broker bridge:
 - **Account Equity Sizing**: Strictly capped at 1% max risk per trade based on live MT4 account equity:
-  $$\text{Volume} = \frac{\text{Equity} \times 0.01}{\text{ATR} \times \text{sl\_mult} \times \text{ContractSize}}$$
+  $$\text{Volume} = \frac{\text{Equity} \times 0.01}{\text{ATR} \times \text{SL Multiplier} \times \text{Contract Size}}$$
 - **Pre-set Take Profit (TP)**: Dynamically set at $+2.0\text{R}$ (or asset-specific target).
-- **Dynamic Stop Loss (SL)**: Set at $\text{Entry Price} \pm (\text{ATR} \times \text{sl\_mult})$.
+- **Dynamic Stop Loss (SL)**: Set at $\text{Entry Price} \pm (\text{ATR} \times \text{SL Multiplier})$.
 - **Breakeven (BE) Trigger**: Placed at $+1.0\text{R}$ (or $+0.8\text{R}$ for FX) to eliminate risk once the position expands.
 
 ### 6. Anthropic Claude Haiku 4.5 Multi-Agent Engine & Per-Asset Analysis
