@@ -515,6 +515,12 @@ function renderPositionsTable(positions) {
       actionBadge = `<span class="trend-badge negative" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #fbbf24;" title="${pos.lifecycle_reason || ''}">⏳ ALPHA DECAY</span>`;
     } else if (pos.lifecycle_action === 'CLOSE_TRAIL_EXIT') {
       actionBadge = `<span class="trend-badge positive" style="background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; color: #60a5fa;" title="${pos.lifecycle_reason || ''}">📉 TRAIL EXIT</span>`;
+    } else if (pos.lifecycle_action === 'LOCK_PROFIT') {
+      actionBadge = `<span class="trend-badge positive" style="background: rgba(16, 185, 129, 0.25); border: 1px solid #10b981; color: #34d399;" title="${pos.lifecycle_reason || ''}">🏆 LOCK +0.5R WIN</span>`;
+    } else if (pos.lifecycle_action === 'EXTEND_TP') {
+      actionBadge = `<span class="trend-badge positive" style="background: rgba(147, 51, 234, 0.25); border: 1px solid #a855f7; color: #c084fc;" title="${pos.lifecycle_reason || ''}">🚀 GREEDY +3.2R TP</span>`;
+    } else if (pos.lifecycle_action === 'TRAIL_SL') {
+      actionBadge = `<span class="trend-badge positive" style="background: rgba(59, 130, 246, 0.25); border: 1px solid #3b82f6; color: #60a5fa;" title="${pos.lifecycle_reason || ''}">📈 DYNAMIC TRAIL</span>`;
     } else if (pos.lifecycle_action === 'MOVE_BREAKEVEN') {
       actionBadge = `<span class="trend-badge positive" title="${pos.lifecycle_reason || ''}">🔒 LOCK BE</span>`;
     } else if (pos.lifecycle_action === 'SCALE_IN') {
@@ -522,18 +528,31 @@ function renderPositionsTable(positions) {
     }
 
     const controlButtons = `
-      <div style="display: flex; gap: 6px; align-items: center;">
-        <button class="btn btn-sm" onclick="openPositionDeliberation('${pos.ticket}', '${pos.symbol}', '${pos.side}')" style="background: rgba(99, 102, 241, 0.18); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Review 5-Agent Deliberation Council & Consensus">
+      <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+        <button class="btn btn-sm" onclick="openPositionDeliberation('${pos.ticket}', '${pos.symbol}', '${pos.side}')" style="background: rgba(99, 102, 241, 0.18); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); padding: 3px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Review 5-Agent Deliberation Council & Consensus">
           💬 Deliberation
         </button>
-        <button class="btn btn-sm" onclick="InstitutionalChart.selectAsset('${pos.symbol}'); window.scrollTo({top: 0, behavior: 'smooth'});" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Focus Chart on this Symbol">
+        <button class="btn btn-sm" onclick="InstitutionalChart.selectAsset('${pos.symbol}'); window.scrollTo({top: 0, behavior: 'smooth'});" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); padding: 3px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Focus Chart on this Symbol">
           📈 Chart
         </button>
-        <button id="btn-close-${pos.ticket}" class="btn btn-sm" onclick="closeOrderTicket('${pos.ticket}')" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;">
+        <button class="btn btn-sm" onclick="modifyOrderPrompt('${pos.ticket}', ${pos.stop_loss || 0}, ${pos.take_profit || 0})" style="background: rgba(245, 158, 11, 0.18); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); padding: 3px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Interfere Mid-Air: Edit SL and TP in real time">
+          🎯 Edit SL/TP
+        </button>
+        ${pos.rec_sl && Math.abs(pos.rec_sl - (pos.stop_loss || 0)) > 0.0001 ? `
+          <button class="btn btn-sm" onclick="executeLifecycleAction('${pos.ticket}', '${pos.action === 'LOCK_PROFIT' ? 'LOCK_PROFIT' : 'MOVE_BREAKEVEN'}')" style="background: rgba(16, 185, 129, 0.22); color: #10b981; border: 1px solid #10b981; padding: 3px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Lock Win: Push SL to ${pos.rec_sl}">
+            🔒 Lock Win
+          </button>
+        ` : ''}
+        ${pos.is_super_trend ? `
+          <button class="btn btn-sm" onclick="executeLifecycleAction('${pos.ticket}', 'EXTEND_TP')" style="background: rgba(168, 85, 247, 0.22); color: #c084fc; border: 1px solid #a855f7; padding: 3px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Greedy Mode: Extend TP to ${pos.rec_tp}">
+            🚀 Greedy TP
+          </button>
+        ` : ''}
+        <button id="btn-close-${pos.ticket}" class="btn btn-sm" onclick="closeOrderTicket('${pos.ticket}')" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); padding: 3px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;" title="Interfere Mid-Air: Immediate Market Close">
           ✕ Close
         </button>
         ${pos.can_scale_in ? `
-          <button id="btn-scale-${pos.symbol}" class="btn btn-sm" onclick="scaleInPosition('${pos.symbol}')" style="background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid #10b981; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;">
+          <button id="btn-scale-${pos.symbol}" class="btn btn-sm" onclick="scaleInPosition('${pos.symbol}')" style="background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid #10b981; padding: 3px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;">
             + Scale In
           </button>
         ` : ''}
@@ -542,11 +561,12 @@ function renderPositionsTable(positions) {
 
     const mfeStr = pos.mfe !== undefined ? `+${pos.mfe.toFixed(2)}R` : '-';
     const maeStr = pos.mae !== undefined ? `${pos.mae.toFixed(2)}R` : '-';
+    const winBadge = pos.guaranteed_win ? `<span style="display: inline-block; font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); border-radius: 3px; padding: 1px 4px; margin-left: 4px;">🛡️ Win Locked</span>` : '';
     const excursionSub = `<div style="font-size: 10px; opacity: 0.7; font-weight: normal; margin-top: 2px;">MFE: ${mfeStr} | MAE: ${maeStr}</div>`;
 
     html += `
       <tr>
-        <td><strong>#${pos.ticket || '0'}</strong></td>
+        <td><strong>#${pos.ticket || '0'}</strong> ${winBadge}</td>
         <td><strong>${pos.symbol}</strong> <span style="font-size: 10px; opacity: 0.6;">(${pos.session || 'M15'})</span></td>
         <td>${sideBadge}</td>
         <td>${(pos.volume || 0.01).toFixed(2)}</td>
@@ -566,7 +586,94 @@ function renderPositionsTable(positions) {
   tbody.innerHTML = html;
 }
 
-// Render Live Strategy Intelligence & Scores
+// Mid-Air Order Interference & Lifecycle Actions
+async function modifyOrderPrompt(ticket, currentSl, currentTp) {
+  const newSl = prompt(`[Mid-Air Interference] Edit Stop Loss for Ticket #${ticket}:`, currentSl || '');
+  if (newSl === null) return;
+  const newTp = prompt(`[Mid-Air Interference] Edit Take Profit for Ticket #${ticket}:`, currentTp || '');
+  if (newTp === null) return;
+
+  try {
+    const res = await fetch('/api/v1/orders/modify', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        ticket: ticket,
+        sl: newSl ? parseFloat(newSl) : null,
+        tp: newTp ? parseFloat(newTp) : null,
+        reason: 'manual_mid_air_adjustment'
+      })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showToast(`⚡ Ticket #${ticket} modified mid-air: SL=${data.sl}, TP=${data.tp}`);
+      fetchQuantEdgeData();
+    } else {
+      showToast(`Failed modifying ticket #${ticket}: ${data.error || 'error'}`, 'error');
+    }
+  } catch (e) {
+    showToast(`Error: ${e.message}`, 'error');
+  }
+}
+
+async function executeLifecycleAction(ticket, actionName) {
+  try {
+    const res = await fetch('/api/v1/orders/action', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ ticket: ticket, action: actionName })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showToast(`⚡ Lifecycle action ${actionName} applied to #${ticket}`);
+      fetchQuantEdgeData();
+    } else {
+      showToast(`Action failed: ${data.error || 'error'}`, 'error');
+    }
+  } catch (e) {
+    showToast(`Error: ${e.message}`, 'error');
+  }
+}
+
+async function closeOrderTicket(ticket) {
+  if (!confirm(`Are you sure you want to close ticket #${ticket} immediately in mid-air?`)) return;
+  const btn = document.getElementById(`btn-close-${ticket}`);
+  if (btn) { btn.disabled = true; btn.innerText = 'Closing...'; }
+  try {
+    const res = await fetch(`/api/v1/orders/close/${ticket}`, { method: 'POST' });
+    const data = await res.json();
+    if (data.ok) {
+      showToast(`Ticket #${ticket} closed successfully!`);
+      fetchQuantEdgeData();
+    } else {
+      showToast(`Failed closing ticket: ${data.error || 'error'}`, 'error');
+      if (btn) { btn.disabled = false; btn.innerText = '✕ Close'; }
+    }
+  } catch (e) {
+    showToast(`Error: ${e.message}`, 'error');
+    if (btn) { btn.disabled = false; btn.innerText = '✕ Close'; }
+  }
+}
+
+async function scaleInPosition(asset) {
+  if (!confirm(`Add scale-in order for ${asset} following strong trend momentum?`)) return;
+  try {
+    const res = await fetch('/api/v1/orders/scale-in', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ asset: asset })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showToast(`Scale-in order placed for ${asset}!`);
+      fetchQuantEdgeData();
+    } else {
+      showToast(`Scale-in failed: ${data.error || 'error'}`, 'error');
+    }
+  } catch (e) {
+    showToast(`Error: ${e.message}`, 'error');
+  }
+}
 let prevPrices = {};
 
 function renderStrategyStatus(strategyStatus, assetBreakdown) {

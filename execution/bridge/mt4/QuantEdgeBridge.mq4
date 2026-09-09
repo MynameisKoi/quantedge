@@ -636,12 +636,59 @@ void HandleCloseAll(const string id)
   }
 
 //+------------------------------------------------------------------+
+void HandleModify(const string id, const string json)
+  {
+   int ticket = (int)ExtractNumber(json, "ticket", 0);
+   if(ticket <= 0 || !OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES))
+     {
+      ReplyErr(id, "position_not_found");
+      return;
+     }
+   if(OrderMagicNumber() != InpMagic)
+     {
+      ReplyErr(id, "magic_mismatch");
+      return;
+     }
+   if(OrderType() > OP_SELL)
+     {
+      ReplyErr(id, "not_a_market_position");
+      return;
+     }
+
+   double new_sl = ExtractNumber(json, "sl", OrderStopLoss());
+   double new_tp = ExtractNumber(json, "tp", OrderTakeProfit());
+
+   int digits = DigitsFor(OrderSymbol());
+   if(new_sl > 0) new_sl = NormalizeDouble(new_sl, digits);
+   if(new_tp > 0) new_tp = NormalizeDouble(new_tp, digits);
+
+   // Check if values actually changed to avoid err 1 (no changes)
+   if(MathAbs(new_sl - OrderStopLoss()) < Point && MathAbs(new_tp - OrderTakeProfit()) < Point)
+     {
+      ReplyOk(id, StringFormat("{\"ticket\":%d,\"modified\":true,\"unchanged\":true,\"sl\":%.5f,\"tp\":%.5f}",
+                               ticket, OrderStopLoss(), OrderTakeProfit()));
+      return;
+     }
+
+   ResetLastError();
+   if(!OrderModify(ticket, OrderOpenPrice(), new_sl, new_tp, 0, clrOrange))
+     {
+      int err = GetLastError();
+      ReplyErr(id, StringFormat("OrderModify_failed_err_%d", err));
+      return;
+     }
+
+   ReplyOk(id, StringFormat("{\"ticket\":%d,\"modified\":true,\"sl\":%.5f,\"tp\":%.5f,\"platform\":\"MT4\"}",
+                            ticket, new_sl, new_tp));
+  }
+
+//+------------------------------------------------------------------+
 void HandleCommand(const string json)
   {
    string id = ExtractString(json, "id");
    string action = ExtractString(json, "action");
    if(id == "" || action == "")
-      return;
+       return;
 
    if(action == "PING")
       HandlePing(id);
@@ -655,6 +702,8 @@ void HandleCommand(const string json)
       HandleClose(id, json);
    else if(action == "CLOSE_ALL")
       HandleCloseAll(id);
+   else if(action == "MODIFY")
+      HandleModify(id, json);
    else if(action == "HISTORY")
      {
       WriteHistory();

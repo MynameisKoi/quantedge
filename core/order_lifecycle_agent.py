@@ -214,11 +214,17 @@ class OrderLifecycleAgent:
             spread_r = round(spread / max(stop_dist, 1e-4), 3)
 
             # -----------------------------------------------------------------
-            # 4. Bar-Close Confirmation for Trend Invalidation
+            # 4. Bar-Close Confirmation & Trend Velocity Assessment
             # -----------------------------------------------------------------
             trend = indicators.get("trend", "neutral")
+            adx = float(indicators.get("adx", 20.0))
             ema21 = float(indicators.get("ema21", entry_px))
             ema50 = float(indicators.get("ema50", entry_px))
+
+            # Aligned directional trend momentum
+            is_aligned = (canonical_side == "long" and trend == "bullish") or (canonical_side == "short" and trend == "bearish")
+            is_strong_trend = (adx >= 24.0) and is_aligned
+            is_super_trend = (adx >= 28.0) and is_aligned
 
             # Structural condition: candle close beyond key level (EMA 50 or EMA 21 with confirmed opposing trend)
             is_structurally_against = False
@@ -245,7 +251,44 @@ class OrderLifecycleAgent:
             defensive_threshold = -1.0 - max(0.0, spread_r - 0.1)
 
             # -----------------------------------------------------------------
-            # 5. Triple-Barrier Dynamic Decision Logic
+            # 5. Greedy Trailing & Recommended SL / TP Targets
+            # -----------------------------------------------------------------
+            rec_sl = sl
+            rec_tp = tp
+            greedy_active = False
+            guaranteed_win = False
+
+            if canonical_side == "long":
+                if is_super_trend and r_multiple >= 1.5:
+                    rec_tp = entry_px + (3.2 * stop_dist)
+                if r_multiple >= 2.0 and is_strong_trend:
+                    rec_sl = max(sl or 0.0, entry_px + ((r_multiple - 0.8) * stop_dist))
+                    greedy_active = True
+                    guaranteed_win = True
+                elif r_multiple >= 1.2 and is_strong_trend:
+                    rec_sl = max(sl or 0.0, entry_px + (0.50 * stop_dist))
+                    greedy_active = True
+                    guaranteed_win = True
+                elif r_multiple >= 0.9:
+                    rec_sl = max(sl or 0.0, entry_px + (0.05 * stop_dist))
+                    guaranteed_win = True
+            else:  # short
+                if is_super_trend and r_multiple >= 1.5:
+                    rec_tp = entry_px - (3.2 * stop_dist)
+                if r_multiple >= 2.0 and is_strong_trend:
+                    rec_sl = min(sl or float("inf"), entry_px - ((r_multiple - 0.8) * stop_dist))
+                    greedy_active = True
+                    guaranteed_win = True
+                elif r_multiple >= 1.2 and is_strong_trend:
+                    rec_sl = min(sl or float("inf"), entry_px - (0.50 * stop_dist))
+                    greedy_active = True
+                    guaranteed_win = True
+                elif r_multiple >= 0.9:
+                    rec_sl = min(sl or float("inf"), entry_px - (0.05 * stop_dist))
+                    guaranteed_win = True
+
+            # -----------------------------------------------------------------
+            # 6. Triple-Barrier Dynamic Decision Logic & Mid-Air Adjustments
             # -----------------------------------------------------------------
             action = "HOLD"
             action_type = "hold"
@@ -266,15 +309,24 @@ class OrderLifecycleAgent:
                 )
 
             # BARRIER 1 (Upper Barrier): Take Profit (+2.0R or TP price hit)
-            if r_multiple >= 2.0 or (tp and ((canonical_side == "long" and curr_px >= tp) or (canonical_side == "short" and curr_px <= tp))):
+            # In Greedy Mode with super-trend momentum, extend TP to +3.2R to let winners run!
+            if is_super_trend and r_multiple >= 1.8 and r_multiple < 3.2:
+                tp_dist_r = abs(tp - entry_px) / max(stop_dist, 1e-4) if tp else 2.0
+                if tp_dist_r < 2.8:
+                    action = "EXTEND_TP"
+                    action_type = "adjust_tp"
+                    reason = (
+                        f"Super-trend active (ADX {adx:.1f}, {trend.upper()}). "
+                        f"Greedy Mode: extending TP to +3.2R and locking SL above order at {r_multiple:+.2f}R to capture macro runner."
+                    )
+                    urgency = "high"
+            elif r_multiple >= 3.2 or (tp and ((canonical_side == "long" and curr_px >= tp) or (canonical_side == "short" and curr_px <= tp))):
                 action = "CLOSE_TAKE_PROFIT"
                 action_type = "close"
-                reason = f"Upper Barrier (+2.0R) achieved at {r_multiple:+.2f}R. Bank profit and secure capital."
+                reason = f"Take Profit achieved at {r_multiple:+.2f}R. Bank profit and secure capital."
                 urgency = "high"
 
             # Strict Breathing Window Protection:
-            # During the initial development window, allow the position to breathe and absorb spread/pullbacks.
-            # Do NOT cut defensively or exit for alpha decay during breathing window.
             elif in_breathing_window:
                 action = "HOLD"
                 action_type = "hold"
@@ -316,21 +368,35 @@ class OrderLifecycleAgent:
                 )
                 urgency = "high"
 
-            # RULE 5: Breakeven Ratchet (+1.0R achieved)
+            # RULE 5: Greedy Profit Lock (Strong Trend +1.2R+ achieved, push SL above order)
+            elif is_strong_trend and r_multiple >= 1.2 and (
+                sl is None
+                or (canonical_side == "long" and sl < (entry_px + 0.35 * stop_dist))
+                or (canonical_side == "short" and sl > (entry_px - 0.35 * stop_dist))
+            ):
+                action = "LOCK_PROFIT"
+                action_type = "adjust_sl"
+                reason = (
+                    f"Strong {trend.upper()} trend (ADX {adx:.1f}). Greedy Mode active at {r_multiple:+.2f}R: "
+                    f"Pushing SL above entry to guarantee a winning outcome (+0.50R locked)."
+                )
+                urgency = "high"
+
+            # RULE 6: Breakeven Ratchet (+1.0R achieved)
             elif r_multiple >= 1.0 and (sl is None or abs(sl - entry_px) > (stop_dist * 0.5)):
                 action = "MOVE_BREAKEVEN"
                 action_type = "adjust_sl"
                 reason = f"Floating profit at {r_multiple:+.2f}R (Peak MFE: {cur_mfe:+.2f}R). Move stop loss to entry ({entry_px:.2f}) for zero risk."
                 urgency = "medium"
 
-            # RULE 6: Pre-News Blackout De-risking
+            # RULE 7: Pre-News Blackout De-risking
             elif is_blackout and blackout_reason != "weekend_closed" and not in_breathing_window and r_multiple < 0.5:
                 action = "CLOSE_PRE_NEWS"
                 action_type = "close"
                 reason = f"Tier-1 news event blackout active ({blackout_reason}). Close to avoid spread slippage."
                 urgency = "medium"
 
-            # RULE 7: Scale-In / Pyramiding Opportunity
+            # RULE 8: Scale-In / Pyramiding Opportunity
             score = float(alloc.get("score", 0.0))
             threshold = float(alloc.get("threshold", 65.0))
             consensus_met = alloc.get("agent_consensus", {}).get("all_agreed", False)
@@ -360,12 +426,18 @@ class OrderLifecycleAgent:
                 "spread_r": spread_r,
                 "stop_loss": sl,
                 "take_profit": tp,
+                "rec_sl": round(rec_sl, 5 if "EUR" in canon_sym else 2) if rec_sl else None,
+                "rec_tp": round(rec_tp, 5 if "EUR" in canon_sym else 2) if rec_tp else None,
+                "is_strong_trend": is_strong_trend,
+                "is_super_trend": is_super_trend,
+                "greedy_active": greedy_active,
+                "guaranteed_win": guaranteed_win,
                 "unrealized_pnl": profit,
                 "r_multiple": r_multiple,
                 "mfe": cur_mfe,
                 "mae": cur_mae,
                 "triple_barrier": {
-                    "upper_barrier_r": 2.0,
+                    "upper_barrier_r": 3.2 if is_super_trend else 2.0,
                     "lower_barrier_r": -1.0,
                     "vertical_barrier_sec": vertical_barrier_sec,
                     "vertical_elapsed_pct": min(100.0, round((holding_sec / vertical_barrier_sec) * 100.0, 1)),
@@ -407,9 +479,15 @@ class OrderLifecycleAgent:
             return cooldown_duration - elapsed
         return 0.0
 
-    async def execute_action(self, ticket: int | str, action: str | None = None) -> dict[str, Any]:
+    async def execute_action(
+        self,
+        ticket: int | str,
+        action: str | None = None,
+        new_sl: float | None = None,
+        new_tp: float | None = None,
+    ) -> dict[str, Any]:
         """
-        Execute an action on a specific ticket (close ticket or fire scale-in).
+        Execute an action on a specific ticket (close ticket, fire scale-in, or modify SL/TP mid-air).
         """
         analyses = await self.evaluate_open_positions()
         pos_analysis = next((a for a in analyses if str(a["ticket"]) == str(ticket)), None)
@@ -466,6 +544,21 @@ class OrderLifecycleAgent:
                 "message": f"Scale-in order submitted for {asset} ({side.upper()}) alongside ticket #{ticket}",
             }
 
+        elif target_action in ("MOVE_BREAKEVEN", "LOCK_PROFIT", "TRAIL_SL", "EXTEND_TP", "MODIFY"):
+            target_sl = new_sl if new_sl is not None else (pos_analysis.get("rec_sl") if pos_analysis else None)
+            target_tp = new_tp if new_tp is not None else (pos_analysis.get("rec_tp") if pos_analysis else None)
+            logger.info("OrderLifecycleAgent executing %s on ticket #%s: SL=%s, TP=%s", target_action, ticket, target_sl, target_tp)
+            res = await self.order_manager.modify_ticket(ticket, sl=target_sl, tp=target_tp)
+            return {
+                "ok": res.get("ok", False),
+                "action": target_action,
+                "ticket": ticket,
+                "sl": target_sl,
+                "tp": target_tp,
+                "result": res,
+                "message": f"Successfully modified ticket #{ticket} ({target_action}) to SL: {target_sl}, TP: {target_tp}",
+            }
+
         return {
             "ok": True,
             "action": target_action,
@@ -477,17 +570,34 @@ class OrderLifecycleAgent:
     async def run_lifecycle_management_tick(self, auto_close: bool = False) -> list[dict[str, Any]]:
         """
         Autonomous periodic check called by the engine loop.
-        Monitors all positions and optionally auto-executes high-urgency closures.
+        Monitors all positions and auto-executes high-urgency closures & mid-air SL/TP adjustments.
         """
         evaluations = await self.evaluate_open_positions()
         if auto_close:
             for ev in evaluations:
-                if ev["action"] in ("CLOSE_TAKE_PROFIT", "CLOSE_DEFENSIVE", "CLOSE_ALPHA_DECAY", "CLOSE_TRAIL_EXIT") and ev["urgency"] in ("high", "medium"):
+                ticket = ev["ticket"]
+                act = ev["action"]
+                urgency = ev["urgency"]
+                if act in ("CLOSE_TAKE_PROFIT", "CLOSE_DEFENSIVE", "CLOSE_ALPHA_DECAY", "CLOSE_TRAIL_EXIT") and urgency in ("high", "medium"):
                     logger.warning(
                         "[OrderLifecycleAgent Auto-Cut] Ticket #%s (%s %s) triggered %s: %s",
-                        ev["ticket"], ev["canonical_symbol"], ev["side"], ev["action"], ev["reason"]
+                        ticket, ev["canonical_symbol"], ev["side"], act, ev["reason"]
                     )
-                    await self.execute_action(ev["ticket"], ev["action"])
+                    await self.execute_action(ticket, act)
+                elif act in ("MOVE_BREAKEVEN", "LOCK_PROFIT", "TRAIL_SL", "EXTEND_TP") and urgency in ("high", "medium"):
+                    rec_sl = ev.get("rec_sl")
+                    rec_tp = ev.get("rec_tp")
+                    cur_sl = ev.get("stop_loss")
+                    cur_tp = ev.get("take_profit")
+                    stop_dist = ev.get("stop_distance", 1.0)
+                    sl_diff = abs((rec_sl or 0.0) - (cur_sl or 0.0))
+                    tp_diff = abs((rec_tp or 0.0) - (cur_tp or 0.0))
+                    if (rec_sl and sl_diff >= (0.10 * stop_dist)) or (rec_tp and tp_diff >= (0.20 * stop_dist)):
+                        logger.info(
+                            "[OrderLifecycleAgent Auto-Modify] Ticket #%s (%s %s) %s -> SL: %s, TP: %s: %s",
+                            ticket, ev["canonical_symbol"], ev["side"], act, rec_sl, rec_tp, ev["reason"]
+                        )
+                        await self.execute_action(ticket, act, new_sl=rec_sl, new_tp=rec_tp)
         return evaluations
 
 

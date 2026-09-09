@@ -76,6 +76,13 @@ class OrderActionRequest(BaseModel):
     action: str = "CLOSE"
 
 
+class OrderModifyRequest(BaseModel):
+    ticket: str | int
+    sl: float | None = None
+    tp: float | None = None
+    reason: str = "manual_mid_air_adjustment"
+
+
 class ScaleInRequest(BaseModel):
     asset: str
     side: str | None = None
@@ -122,4 +129,18 @@ async def scale_in_order(req: ScaleInRequest = Body(...)):
     ticket = matching["ticket"] if matching else 0
 
     result = await order_lifecycle_agent.execute_action(ticket=ticket, action="SCALE_IN")
+    return result
+
+
+@router.post("/orders/modify")
+async def modify_order_ticket(req: OrderModifyRequest = Body(...)):
+    """Interfere mid-air to modify Stop Loss and/or Take Profit for an open order ticket."""
+    from core.order_lifecycle_agent import order_lifecycle_agent
+
+    result = await order_lifecycle_agent.execute_action(
+        ticket=req.ticket,
+        action="MODIFY",
+        new_sl=req.sl,
+        new_tp=req.tp,
+    )
     return result

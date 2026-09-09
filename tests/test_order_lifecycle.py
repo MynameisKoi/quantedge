@@ -9,6 +9,7 @@ from httpx import ASGITransport, AsyncClient
 from api.main import app
 from core.order_lifecycle_agent import order_lifecycle_agent
 from core.portfolio import Position, portfolio
+from data.feeds.live_price_feed import live_price_feed
 
 
 @pytest.mark.asyncio
@@ -37,7 +38,7 @@ async def test_order_lifecycle_evaluation_and_actions():
         assert p_eval is not None
         assert p_eval["symbol"] in ("BTCUSD", "BTCUSDm")
         assert "r_multiple" in p_eval
-        assert p_eval["action"] in ("HOLD", "SCALE_IN", "MOVE_BREAKEVEN", "CLOSE_TAKE_PROFIT", "CLOSE_DEFENSIVE")
+        assert p_eval["action"] in ("HOLD", "SCALE_IN", "MOVE_BREAKEVEN", "LOCK_PROFIT", "TRAIL_SL", "EXTEND_TP", "CLOSE_TAKE_PROFIT", "CLOSE_DEFENSIVE")
     finally:
         portfolio.positions.clear()
         portfolio.balance = 10000.0
@@ -211,4 +212,117 @@ def test_session_aware_breathing_window_scaling():
     breathing_eur, vertical_eur, _ = order_lifecycle_agent.get_dynamic_session_window("EURUSD")
     assert breathing_eur in (900.0, 1800.0)
     assert vertical_eur in (5400.0, 7200.0)
+
+
+@pytest.mark.asyncio
+async def test_greedy_profit_locking_above_entry():
+    """Verify that during a strong trend, lifecycle agent pushes SL above entry to guarantee a win."""
+    portfolio.positions.clear()
+    portfolio.sync_mt4(1000.0, 1000.0)
+
+    # Position long at 78000, initial SL at 77000 (stop_dist = 1000)
+    # Price is at 79350 (+1.35R)
+    pos = Position(
+        symbol="BTCUSD",
+        side="long",
+        volume=0.01,
+        entry_price=78000.0,
+        stop_loss=77000.0,
+        take_profit=80000.0,
+        unrealized_pnl=13.50,
+        ticket="777003",
+    )
+    portfolio.open_position(pos)
+
+    # Mock quotes and strong trend indicators (ADX 28.0, bullish)
+    orig_quotes = live_price_feed.get_live_quotes
+    live_price_feed.get_live_quotes = lambda: {"BTCUSD": {"bid": 79350.0, "ask": 79360.0}}
+
+    # Set first seen past breathing window
+    now_ts = datetime.now(UTC).timestamp()
+    order_lifecycle_agent._ticket_first_seen["777003"] = now_ts - 1800.0
+
+    orig_request = order_lifecycle_agent.order_manager.bridge.request
+    async def mock_req(action, payload=None, timeout=12.0):
+        if action == "MODIFY":
+            return {"ok": True, "ticket": (payload or {}).get("ticket"), "sl": (payload or {}).get("sl"), "tp": (payload or {}).get("tp")}
+        return await orig_request(action, payload, timeout)
+
+    order_lifecycle_agent.order_manager.bridge.request = mock_req
+
+    try:
+        evals = await order_lifecycle_agent.evaluate_open_positions()
+        p_eval = next((e for e in evals if str(e["ticket"]) == "777003"), None)
+        assert p_eval is not None
+        assert p_eval["r_multiple"] >= 1.2
+        assert p_eval["rec_sl"] is not None
+        # Recommended SL must be pushed ABOVE entry price (78000.0)
+        assert p_eval["rec_sl"] > 78000.0
+        assert p_eval["guaranteed_win"] is True
+        assert p_eval["action"] in ("LOCK_PROFIT", "MOVE_BREAKEVEN", "EXTEND_TP", "HOLD")
+
+        # Execute the action (LOCK_PROFIT / MODIFY)
+        mod_res = await order_lifecycle_agent.execute_action(ticket="777003", action="LOCK_PROFIT")
+        assert mod_res["ok"] is True
+        assert mod_res["sl"] > 78000.0
+    finally:
+        portfolio.positions.clear()
+        order_lifecycle_agent._ticket_first_seen.pop("777003", None)
+        live_price_feed.get_live_quotes = orig_quotes
+        order_lifecycle_agent.order_manager.bridge.request = orig_request
+
+
+@pytest.mark.asyncio
+async def test_mid_air_modify_api_and_execution():
+    """Verify mid-air interference API modifies order parameters in real time."""
+    portfolio.positions.clear()
+    portfolio.sync_mt4(1000.0, 1000.0)
+
+    pos = Position(
+        symbol="EURUSD",
+        side="long",
+        volume=0.05,
+        entry_price=1.16000,
+        stop_loss=1.15750,
+        take_profit=1.16500,
+        ticket="777004",
+    )
+    portfolio.open_position(pos)
+
+    orig_request = order_lifecycle_agent.order_manager.bridge.request
+    async def mock_req(action, payload=None, timeout=12.0):
+        if action == "MODIFY":
+            return {"ok": True, "ticket": (payload or {}).get("ticket"), "sl": (payload or {}).get("sl"), "tp": (payload or {}).get("tp")}
+        return await orig_request(action, payload, timeout)
+
+    order_lifecycle_agent.order_manager.bridge.request = mock_req
+
+    try:
+        transport = ASGITransport(app=app)
+        async with AsyncClient(transport=transport, base_url="http://test") as ac:
+            # Mid-air modify: move SL above entry to 1.16100 (guaranteed win) and push TP to 1.16800
+            res = await ac.post(
+                "/api/v1/orders/modify",
+                json={
+                    "ticket": "777004",
+                    "sl": 1.16100,
+                    "tp": 1.16800,
+                    "reason": "greedy_trend_lock",
+                },
+            )
+            assert res.status_code == 200
+            data = res.json()
+            assert data["ok"] is True
+            assert data["sl"] == 1.16100
+            assert data["tp"] == 1.16800
+
+            # Verify in-memory position was updated
+            updated_pos = portfolio.positions.get("EURUSD:long")
+            assert updated_pos is not None
+            assert updated_pos.stop_loss == 1.16100
+            assert updated_pos.take_profit == 1.16800
+    finally:
+        portfolio.positions.clear()
+        order_lifecycle_agent.order_manager.bridge.request = orig_request
+
 

@@ -1,5 +1,233 @@
 [
   {
+    "ticket": "999103",
+    "asset": "BTCUSD",
+    "symbol": "BTCUSD",
+    "side": "SHORT",
+    "volume": 0.01,
+    "entry_price": 79800.0,
+    "stop_loss": 79689.33,
+    "take_profit": 75439.33,
+    "stop_distance": 110.67,
+    "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+    "strategy_archetype": "volatility_breakout",
+    "consensus_score": 85.0,
+    "consensus_agreed": 3,
+    "total_agents": 5,
+    "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 78839.33. Strategy: Bitcoin Volatility Compression & Momentum Runner (volatility_breakout). Consensus: 3/5 agents agreed (Score 45.0/65). Size: 0.01 lots (1% equity risk = $4.18 on $417.56 equity). Risk controls: S/L=79689.33 (-850.00), T/P=75439.33 (+3400.00), B/E trigger=77564.33.",
+    "indicators": {
+      "price": 78839.33,
+      "ema9": 78746.19,
+      "ema21": 78651.97,
+      "ema50": 78596.56,
+      "atr": 127.11,
+      "rsi": 63.1,
+      "adx": 27.5,
+      "trend": "bullish",
+      "donchian_high": 78889.01,
+      "donchian_low": 78382.31,
+      "candle_range": 84.26,
+      "candle_body": 35.16
+    },
+    "deliberations": {
+      "regime_pm": {
+        "name": "RegimePM",
+        "title": "Global Macro Lead",
+        "avatar": "\ud83d\udc64",
+        "stance": "APPROVED",
+        "statement": "Macro regime validated as Trend Momentum. Institutional order flow aligns with SHORT BTCUSD. Consensus confidence is high (85.0/100). Yield curve and USD dynamics provide positive tailwinds."
+      },
+      "claude_haiku": {
+        "name": "Asset Specialist (Claude Haiku 4.5)",
+        "title": "Specialist Reasoning Agent",
+        "avatar": "\ud83e\udd16",
+        "stance": "APPROVED",
+        "statement": "Sentiment analysis for BTCUSD confirms directional accumulation. No high-impact black swan catalysts within the 30-minute execution window. Favorable asymmetry on this setup."
+      },
+      "liquidity_agent": {
+        "name": "LiquidityAgent",
+        "title": "Order Flow & Session Depth",
+        "avatar": "\ud83d\udca7",
+        "stance": "APPROVED",
+        "statement": "Liquidity pool assessment confirms healthy market depth. Bid/ask spread is tight. Avoided low-volume liquidity traps; institutional participation confirmed across London/NY flow."
+      },
+      "technical_reasoner": {
+        "name": "TechnicalReasoner",
+        "title": "MT4 Geometry & Price Action",
+        "avatar": "\ud83d\udcd0",
+        "stance": "APPROVED",
+        "statement": "M15 structure confirmed: Bitcoin Volatility Compression & Momentum Runner (volatility_breakout). Entry at 79800.0 with structural alignment. Momentum indicators (ADX & RSI) demonstrate genuine expansion."
+      },
+      "risk_guard": {
+        "name": "RiskGuard",
+        "title": "Capital Preservation & Position Sizing",
+        "avatar": "\ud83d\udee1\ufe0f",
+        "stance": "APPROVED",
+        "statement": "Fixed 1% equity risk enforced. Stop loss set at 79689.33 with institutional noise buffer. Target Take Profit at 75439.33. Asymmetric Reward-to-Risk ratio satisfies safety criteria."
+      }
+    },
+    "status": "OPEN",
+    "opened_at": "2026-09-09T02:06:08.857852+00:00",
+    "closed_at": null,
+    "close_price": null,
+    "close_reason": null,
+    "pnl": null,
+    "r_multiple": null,
+    "post_mortem": null
+  },
+  {
+    "ticket": "999102",
+    "asset": "BTCUSD",
+    "symbol": "BTCUSD",
+    "side": "SHORT",
+    "volume": 0.01,
+    "entry_price": 79800.0,
+    "stop_loss": 79689.33,
+    "take_profit": 75439.33,
+    "stop_distance": 110.67,
+    "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+    "strategy_archetype": "volatility_breakout",
+    "consensus_score": 85.0,
+    "consensus_agreed": 3,
+    "total_agents": 5,
+    "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 78839.33. Strategy: Bitcoin Volatility Compression & Momentum Runner (volatility_breakout). Consensus: 3/5 agents agreed (Score 45.0/65). Size: 0.01 lots (1% equity risk = $4.18 on $417.56 equity). Risk controls: S/L=79689.33 (-850.00), T/P=75439.33 (+3400.00), B/E trigger=77564.33.",
+    "indicators": {
+      "price": 78839.33,
+      "ema9": 78746.19,
+      "ema21": 78651.97,
+      "ema50": 78596.56,
+      "atr": 127.11,
+      "rsi": 63.1,
+      "adx": 27.5,
+      "trend": "bullish",
+      "donchian_high": 78889.01,
+      "donchian_low": 78382.31,
+      "candle_range": 84.26,
+      "candle_body": 35.16
+    },
+    "deliberations": {
+      "regime_pm": {
+        "name": "RegimePM",
+        "title": "Global Macro Lead",
+        "avatar": "\ud83d\udc64",
+        "stance": "APPROVED",
+        "statement": "Macro regime validated as Trend Momentum. Institutional order flow aligns with SHORT BTCUSD. Consensus confidence is high (85.0/100). Yield curve and USD dynamics provide positive tailwinds."
+      },
+      "claude_haiku": {
+        "name": "Asset Specialist (Claude Haiku 4.5)",
+        "title": "Specialist Reasoning Agent",
+        "avatar": "\ud83e\udd16",
+        "stance": "APPROVED",
+        "statement": "Sentiment analysis for BTCUSD confirms directional accumulation. No high-impact black swan catalysts within the 30-minute execution window. Favorable asymmetry on this setup."
+      },
+      "liquidity_agent": {
+        "name": "LiquidityAgent",
+        "title": "Order Flow & Session Depth",
+        "avatar": "\ud83d\udca7",
+        "stance": "APPROVED",
+        "statement": "Liquidity pool assessment confirms healthy market depth. Bid/ask spread is tight. Avoided low-volume liquidity traps; institutional participation confirmed across London/NY flow."
+      },
+      "technical_reasoner": {
+        "name": "TechnicalReasoner",
+        "title": "MT4 Geometry & Price Action",
+        "avatar": "\ud83d\udcd0",
+        "stance": "APPROVED",
+        "statement": "M15 structure confirmed: Bitcoin Volatility Compression & Momentum Runner (volatility_breakout). Entry at 79800.0 with structural alignment. Momentum indicators (ADX & RSI) demonstrate genuine expansion."
+      },
+      "risk_guard": {
+        "name": "RiskGuard",
+        "title": "Capital Preservation & Position Sizing",
+        "avatar": "\ud83d\udee1\ufe0f",
+        "stance": "APPROVED",
+        "statement": "Fixed 1% equity risk enforced. Stop loss set at 79689.33 with institutional noise buffer. Target Take Profit at 75439.33. Asymmetric Reward-to-Risk ratio satisfies safety criteria."
+      }
+    },
+    "status": "OPEN",
+    "opened_at": "2026-09-09T02:06:08.734765+00:00",
+    "closed_at": null,
+    "close_price": null,
+    "close_reason": null,
+    "pnl": null,
+    "r_multiple": null,
+    "post_mortem": null
+  },
+  {
+    "ticket": "999101",
+    "asset": "BTCUSD",
+    "symbol": "BTCUSD",
+    "side": "LONG",
+    "volume": 0.01,
+    "entry_price": 79800.0,
+    "stop_loss": 77999.33,
+    "take_profit": 82249.33,
+    "stop_distance": 1800.67,
+    "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
+    "strategy_archetype": "volatility_breakout",
+    "consensus_score": 85.0,
+    "consensus_agreed": 5,
+    "total_agents": 5,
+    "rationale": "Order Decision Agent approved LONG BTCUSD (BTCUSDm) at 78849.33. Strategy: Bitcoin Volatility Compression & Momentum Runner (volatility_breakout). Consensus: 5/5 agents agreed (Score 70.0/65). Size: 0.01 lots (1% equity risk = $4.18 on $417.56 equity). Risk controls: S/L=77999.33 (-850.00), T/P=82249.33 (+3400.00), B/E trigger=80124.33.",
+    "indicators": {
+      "price": 78839.33,
+      "ema9": 78746.19,
+      "ema21": 78651.97,
+      "ema50": 78596.56,
+      "atr": 127.11,
+      "rsi": 63.1,
+      "adx": 27.5,
+      "trend": "bullish",
+      "donchian_high": 78889.01,
+      "donchian_low": 78382.31,
+      "candle_range": 84.26,
+      "candle_body": 35.16
+    },
+    "deliberations": {
+      "regime_pm": {
+        "name": "RegimePM",
+        "title": "Global Macro Lead",
+        "avatar": "\ud83d\udc64",
+        "stance": "APPROVED",
+        "statement": "Macro regime validated as Trend Momentum. Institutional order flow aligns with LONG BTCUSD. Consensus confidence is high (85.0/100). Yield curve and USD dynamics provide positive tailwinds."
+      },
+      "claude_haiku": {
+        "name": "Asset Specialist (Claude Haiku 4.5)",
+        "title": "Specialist Reasoning Agent",
+        "avatar": "\ud83e\udd16",
+        "stance": "APPROVED",
+        "statement": "Sentiment analysis for BTCUSD confirms directional accumulation. No high-impact black swan catalysts within the 30-minute execution window. Favorable asymmetry on this setup."
+      },
+      "liquidity_agent": {
+        "name": "LiquidityAgent",
+        "title": "Order Flow & Session Depth",
+        "avatar": "\ud83d\udca7",
+        "stance": "APPROVED",
+        "statement": "Liquidity pool assessment confirms healthy market depth. Bid/ask spread is tight. Avoided low-volume liquidity traps; institutional participation confirmed across London/NY flow."
+      },
+      "technical_reasoner": {
+        "name": "TechnicalReasoner",
+        "title": "MT4 Geometry & Price Action",
+        "avatar": "\ud83d\udcd0",
+        "stance": "APPROVED",
+        "statement": "M15 structure confirmed: Bitcoin Volatility Compression & Momentum Runner (volatility_breakout). Entry at 79800.0 with structural alignment. Momentum indicators (ADX & RSI) demonstrate genuine expansion."
+      },
+      "risk_guard": {
+        "name": "RiskGuard",
+        "title": "Capital Preservation & Position Sizing",
+        "avatar": "\ud83d\udee1\ufe0f",
+        "stance": "APPROVED",
+        "statement": "Fixed 1% equity risk enforced. Stop loss set at 77999.33 with institutional noise buffer. Target Take Profit at 82249.33. Asymmetric Reward-to-Risk ratio satisfies safety criteria."
+      }
+    },
+    "status": "OPEN",
+    "opened_at": "2026-09-09T02:06:08.675596+00:00",
+    "closed_at": null,
+    "close_price": null,
+    "close_reason": null,
+    "pnl": null,
+    "r_multiple": null,
+    "post_mortem": null
+  },
+  {
     "ticket": "201489581",
     "asset": "USOIL",
     "symbol": "USOIL",
@@ -64,14 +292,14 @@
         "statement": "Fixed 1% equity risk enforced. Stop loss set at 89.77 with institutional noise buffer. Target Take Profit at 96.55. Asymmetric Reward-to-Risk ratio satisfies safety criteria."
       }
     },
-    "status": "OPEN",
+    "status": "CLOSED",
     "opened_at": "2026-09-08T20:15:01.974047+00:00",
-    "closed_at": null,
-    "close_price": null,
-    "close_reason": null,
-    "pnl": null,
-    "r_multiple": null,
-    "post_mortem": null
+    "closed_at": "2026-09-08T13:32:42.974Z",
+    "close_price": 92.268,
+    "close_reason": "market_close",
+    "pnl": 2.38,
+    "r_multiple": 0.11,
+    "post_mortem": "WIN (+$2.38): The multi-agent consensus held true. TechnicalReasoner's momentum expansion and RiskGuard's trailing buffer allowed price to reach target."
   },
   {
     "ticket": "201399282",
@@ -135,234 +363,6 @@
     "pnl": 27.71,
     "r_multiple": 1.0,
     "post_mortem": "WIN (+$27.71): Take-profit achieved. Thesis validated by session trend flow."
-  },
-  {
-    "ticket": "999103",
-    "asset": "BTCUSD",
-    "symbol": "BTCUSD",
-    "side": "SHORT",
-    "volume": 0.01,
-    "entry_price": 79800.0,
-    "stop_loss": 79367.15,
-    "take_profit": 76307.15,
-    "stop_distance": 432.85,
-    "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
-    "strategy_archetype": "value_pullback",
-    "consensus_score": 85.0,
-    "consensus_agreed": 3,
-    "total_agents": 5,
-    "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 78517.15. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 3/5 agents agreed (Score 45.0/65). Size: 0.01 lots (1% equity risk = $4.17 on $416.64 equity). Risk controls: S/L=79367.15 (-850.00), T/P=76307.15 (+2210.00), B/E trigger=77157.15.",
-    "indicators": {
-      "price": 78517.15,
-      "ema9": 78525.0,
-      "ema21": 78528.31,
-      "ema50": 78517.15,
-      "atr": 182.73,
-      "rsi": 49.6,
-      "adx": 26.0,
-      "trend": "bearish",
-      "donchian_high": 78882.61,
-      "donchian_low": 78151.68999999999,
-      "candle_range": 0.0,
-      "candle_body": 0.0
-    },
-    "deliberations": {
-      "regime_pm": {
-        "name": "RegimePM",
-        "title": "Global Macro Lead",
-        "avatar": "\ud83d\udc64",
-        "stance": "APPROVED",
-        "statement": "Macro regime validated as Trend Momentum. Institutional order flow aligns with SHORT BTCUSD. Consensus confidence is high (85.0/100). Yield curve and USD dynamics provide positive tailwinds."
-      },
-      "claude_haiku": {
-        "name": "Asset Specialist (Claude Haiku 4.5)",
-        "title": "Specialist Reasoning Agent",
-        "avatar": "\ud83e\udd16",
-        "stance": "APPROVED",
-        "statement": "Sentiment analysis for BTCUSD confirms directional accumulation. No high-impact black swan catalysts within the 30-minute execution window. Favorable asymmetry on this setup."
-      },
-      "liquidity_agent": {
-        "name": "LiquidityAgent",
-        "title": "Order Flow & Session Depth",
-        "avatar": "\ud83d\udca7",
-        "stance": "APPROVED",
-        "statement": "Liquidity pool assessment confirms healthy market depth. Bid/ask spread is tight. Avoided low-volume liquidity traps; institutional participation confirmed across London/NY flow."
-      },
-      "technical_reasoner": {
-        "name": "TechnicalReasoner",
-        "title": "MT4 Geometry & Price Action",
-        "avatar": "\ud83d\udcd0",
-        "stance": "APPROVED",
-        "statement": "M15 structure confirmed: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Entry at 79800.0 with structural alignment. Momentum indicators (ADX & RSI) demonstrate genuine expansion."
-      },
-      "risk_guard": {
-        "name": "RiskGuard",
-        "title": "Capital Preservation & Position Sizing",
-        "avatar": "\ud83d\udee1\ufe0f",
-        "stance": "APPROVED",
-        "statement": "Fixed 1% equity risk enforced. Stop loss set at 79367.15 with institutional noise buffer. Target Take Profit at 76307.15. Asymmetric Reward-to-Risk ratio satisfies safety criteria."
-      }
-    },
-    "status": "OPEN",
-    "opened_at": "2026-09-08T20:31:16.026208+00:00",
-    "closed_at": null,
-    "close_price": null,
-    "close_reason": null,
-    "pnl": null,
-    "r_multiple": null,
-    "post_mortem": null
-  },
-  {
-    "ticket": "999102",
-    "asset": "BTCUSD",
-    "symbol": "BTCUSD",
-    "side": "SHORT",
-    "volume": 0.01,
-    "entry_price": 79800.0,
-    "stop_loss": 79367.15,
-    "take_profit": 76307.15,
-    "stop_distance": 432.85,
-    "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
-    "strategy_archetype": "value_pullback",
-    "consensus_score": 85.0,
-    "consensus_agreed": 3,
-    "total_agents": 5,
-    "rationale": "Order Decision Agent approved SHORT BTCUSD (BTCUSDm) at 78517.15. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 3/5 agents agreed (Score 45.0/65). Size: 0.01 lots (1% equity risk = $4.17 on $416.64 equity). Risk controls: S/L=79367.15 (-850.00), T/P=76307.15 (+2210.00), B/E trigger=77157.15.",
-    "indicators": {
-      "price": 78517.15,
-      "ema9": 78525.0,
-      "ema21": 78528.31,
-      "ema50": 78517.15,
-      "atr": 182.73,
-      "rsi": 49.6,
-      "adx": 26.0,
-      "trend": "bearish",
-      "donchian_high": 78882.61,
-      "donchian_low": 78151.68999999999,
-      "candle_range": 0.0,
-      "candle_body": 0.0
-    },
-    "deliberations": {
-      "regime_pm": {
-        "name": "RegimePM",
-        "title": "Global Macro Lead",
-        "avatar": "\ud83d\udc64",
-        "stance": "APPROVED",
-        "statement": "Macro regime validated as Trend Momentum. Institutional order flow aligns with SHORT BTCUSD. Consensus confidence is high (85.0/100). Yield curve and USD dynamics provide positive tailwinds."
-      },
-      "claude_haiku": {
-        "name": "Asset Specialist (Claude Haiku 4.5)",
-        "title": "Specialist Reasoning Agent",
-        "avatar": "\ud83e\udd16",
-        "stance": "APPROVED",
-        "statement": "Sentiment analysis for BTCUSD confirms directional accumulation. No high-impact black swan catalysts within the 30-minute execution window. Favorable asymmetry on this setup."
-      },
-      "liquidity_agent": {
-        "name": "LiquidityAgent",
-        "title": "Order Flow & Session Depth",
-        "avatar": "\ud83d\udca7",
-        "stance": "APPROVED",
-        "statement": "Liquidity pool assessment confirms healthy market depth. Bid/ask spread is tight. Avoided low-volume liquidity traps; institutional participation confirmed across London/NY flow."
-      },
-      "technical_reasoner": {
-        "name": "TechnicalReasoner",
-        "title": "MT4 Geometry & Price Action",
-        "avatar": "\ud83d\udcd0",
-        "stance": "APPROVED",
-        "statement": "M15 structure confirmed: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Entry at 79800.0 with structural alignment. Momentum indicators (ADX & RSI) demonstrate genuine expansion."
-      },
-      "risk_guard": {
-        "name": "RiskGuard",
-        "title": "Capital Preservation & Position Sizing",
-        "avatar": "\ud83d\udee1\ufe0f",
-        "stance": "APPROVED",
-        "statement": "Fixed 1% equity risk enforced. Stop loss set at 79367.15 with institutional noise buffer. Target Take Profit at 76307.15. Asymmetric Reward-to-Risk ratio satisfies safety criteria."
-      }
-    },
-    "status": "OPEN",
-    "opened_at": "2026-09-08T20:31:15.836587+00:00",
-    "closed_at": null,
-    "close_price": null,
-    "close_reason": null,
-    "pnl": null,
-    "r_multiple": null,
-    "post_mortem": null
-  },
-  {
-    "ticket": "999101",
-    "asset": "BTCUSD",
-    "symbol": "BTCUSD",
-    "side": "LONG",
-    "volume": 0.01,
-    "entry_price": 79800.0,
-    "stop_loss": 77677.15,
-    "take_profit": 80737.15,
-    "stop_distance": 2122.85,
-    "strategy_name": "Bitcoin Volatility Compression & Momentum Runner",
-    "strategy_archetype": "value_pullback",
-    "consensus_score": 85.0,
-    "consensus_agreed": 5,
-    "total_agents": 5,
-    "rationale": "Order Decision Agent approved LONG BTCUSD (BTCUSDm) at 78527.15. Strategy: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Consensus: 5/5 agents agreed (Score 70.0/65). Size: 0.01 lots (1% equity risk = $4.17 on $416.64 equity). Risk controls: S/L=77677.15 (-850.00), T/P=80737.15 (+2210.00), B/E trigger=79887.15.",
-    "indicators": {
-      "price": 78517.15,
-      "ema9": 78525.0,
-      "ema21": 78528.31,
-      "ema50": 78517.15,
-      "atr": 182.73,
-      "rsi": 49.6,
-      "adx": 26.0,
-      "trend": "bearish",
-      "donchian_high": 78882.61,
-      "donchian_low": 78151.68999999999,
-      "candle_range": 0.0,
-      "candle_body": 0.0
-    },
-    "deliberations": {
-      "regime_pm": {
-        "name": "RegimePM",
-        "title": "Global Macro Lead",
-        "avatar": "\ud83d\udc64",
-        "stance": "APPROVED",
-        "statement": "Macro regime validated as Trend Momentum. Institutional order flow aligns with LONG BTCUSD. Consensus confidence is high (85.0/100). Yield curve and USD dynamics provide positive tailwinds."
-      },
-      "claude_haiku": {
-        "name": "Asset Specialist (Claude Haiku 4.5)",
-        "title": "Specialist Reasoning Agent",
-        "avatar": "\ud83e\udd16",
-        "stance": "APPROVED",
-        "statement": "Sentiment analysis for BTCUSD confirms directional accumulation. No high-impact black swan catalysts within the 30-minute execution window. Favorable asymmetry on this setup."
-      },
-      "liquidity_agent": {
-        "name": "LiquidityAgent",
-        "title": "Order Flow & Session Depth",
-        "avatar": "\ud83d\udca7",
-        "stance": "APPROVED",
-        "statement": "Liquidity pool assessment confirms healthy market depth. Bid/ask spread is tight. Avoided low-volume liquidity traps; institutional participation confirmed across London/NY flow."
-      },
-      "technical_reasoner": {
-        "name": "TechnicalReasoner",
-        "title": "MT4 Geometry & Price Action",
-        "avatar": "\ud83d\udcd0",
-        "stance": "APPROVED",
-        "statement": "M15 structure confirmed: Bitcoin Volatility Compression & Momentum Runner (value_pullback). Entry at 79800.0 with structural alignment. Momentum indicators (ADX & RSI) demonstrate genuine expansion."
-      },
-      "risk_guard": {
-        "name": "RiskGuard",
-        "title": "Capital Preservation & Position Sizing",
-        "avatar": "\ud83d\udee1\ufe0f",
-        "stance": "APPROVED",
-        "statement": "Fixed 1% equity risk enforced. Stop loss set at 77677.15 with institutional noise buffer. Target Take Profit at 80737.15. Asymmetric Reward-to-Risk ratio satisfies safety criteria."
-      }
-    },
-    "status": "OPEN",
-    "opened_at": "2026-09-08T20:31:15.762253+00:00",
-    "closed_at": null,
-    "close_price": null,
-    "close_reason": null,
-    "pnl": null,
-    "r_multiple": null,
-    "post_mortem": null
   },
   {
     "ticket": "201398735",

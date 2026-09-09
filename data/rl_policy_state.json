@@ -6,7 +6,7 @@
       "skip": 0.0
     },
     "XAUUSD|risk-on|bullish|pullback_ema|m5_bull_shift": {
-      "execute_full": 1.1625,
+      "execute_full": 1.3461,
       "execute_scaled": 0.1,
       "skip": 0.0
     },
@@ -16,7 +16,7 @@
       "skip": 0.0
     },
     "BTCUSD|Volatility Breakout": {
-      "execute_full": 2.8934,
+      "execute_full": 3.6179,
       "execute_scaled": 0.1,
       "skip": 0.0
     },
@@ -48,17 +48,17 @@
       "skip": 0
     },
     "XAUUSD|risk-on|bullish|pullback_ema|m5_bull_shift": {
-      "execute_full": 4,
+      "execute_full": 5,
       "execute_scaled": 0,
       "skip": 0
     },
     "EURUSD|risk-on|bullish|pullback_ema|m5_bull_shift": {
-      "execute_full": 24,
+      "execute_full": 30,
       "execute_scaled": 0,
       "skip": 0
     },
     "BTCUSD|Volatility Breakout": {
-      "execute_full": 3,
+      "execute_full": 4,
       "execute_scaled": 0,
       "skip": 0
     },
@@ -93,7 +93,7 @@
     "BTCUSD|risk-on|trending_moderate|normal_vol": {
       "value_pullback": 0.4,
       "momentum_impulse": 0.3,
-      "volatility_breakout": 0.232,
+      "volatility_breakout": 0.5088,
       "mean_revert": 0.05
     },
     "XAUUSD|risk-on|trending_moderate|normal_vol": {
@@ -109,16 +109,16 @@
       "mean_revert": 0.05
     },
     "XAUUSD|risk-on|trending_strong|normal_vol": {
-      "momentum_impulse": 0.724,
-      "value_pullback": 0.24,
-      "volatility_breakout": 0.19,
-      "mean_revert": -0.46
+      "momentum_impulse": 0.808,
+      "value_pullback": 0.22,
+      "volatility_breakout": 0.17,
+      "mean_revert": -0.48
     },
     "USOIL|risk-on|trending_strong|normal_vol": {
-      "momentum_impulse": 0.8701,
-      "value_pullback": 0.24,
-      "volatility_breakout": 0.19,
-      "mean_revert": -0.46
+      "momentum_impulse": 0.9647,
+      "value_pullback": 0.22,
+      "volatility_breakout": 0.17,
+      "mean_revert": -0.48
     },
     "EURUSD|risk-on|ranging_chop|normal_vol": {
       "mean_revert": 0.36,
@@ -127,10 +127,16 @@
       "momentum_impulse": -0.24
     },
     "BTCUSD|risk-on|trending_strong|normal_vol": {
-      "momentum_impulse": 0.8701,
-      "value_pullback": 0.24,
-      "volatility_breakout": 0.19,
-      "mean_revert": -0.46
+      "momentum_impulse": 0.9831,
+      "value_pullback": 0.22,
+      "volatility_breakout": 0.17,
+      "mean_revert": -0.48
+    },
+    "EURUSD|risk-on|trending_strong|normal_vol": {
+      "momentum_impulse": 0.43,
+      "value_pullback": 0.375,
+      "volatility_breakout": 0.23,
+      "mean_revert": -0.42
     }
   },
   "strategy_counts": {
@@ -143,7 +149,7 @@
     "BTCUSD|risk-on|trending_moderate|normal_vol": {
       "momentum_impulse": 0,
       "value_pullback": 0,
-      "volatility_breakout": 121,
+      "volatility_breakout": 122,
       "mean_revert": 0
     },
     "XAUUSD|risk-on|trending_moderate|normal_vol": {
@@ -159,13 +165,13 @@
       "mean_revert": 0
     },
     "XAUUSD|risk-on|trending_strong|normal_vol": {
-      "momentum_impulse": 3,
+      "momentum_impulse": 4,
       "value_pullback": 0,
       "volatility_breakout": 0,
       "mean_revert": 0
     },
     "USOIL|risk-on|trending_strong|normal_vol": {
-      "momentum_impulse": 3,
+      "momentum_impulse": 4,
       "value_pullback": 0,
       "volatility_breakout": 0,
       "mean_revert": 0
@@ -177,11 +183,17 @@
       "mean_revert": 0
     },
     "BTCUSD|risk-on|trending_strong|normal_vol": {
-      "momentum_impulse": 3,
+      "momentum_impulse": 4,
       "value_pullback": 0,
+      "volatility_breakout": 0,
+      "mean_revert": 0
+    },
+    "EURUSD|risk-on|trending_strong|normal_vol": {
+      "momentum_impulse": 0,
+      "value_pullback": 1,
       "volatility_breakout": 0,
       "mean_revert": 0
     }
   },
-  "updated_at": "2026-09-08T20:31:20.933284+00:00"
+  "updated_at": "2026-09-09T02:06:23.129980+00:00"
 }

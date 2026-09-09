@@ -219,5 +219,22 @@
     "reward": 10.1386,
     "timestamp": "2026-09-08T20:31:15.561265+00:00",
     "closed": true
+  },
+  {
+    "trade_id": "888001",
+    "asset": "BTCUSD",
+    "strategy": "Adaptive_BTC_Expansion",
+    "state_key": "BTCUSD|Volatility Breakout",
+    "action": "execute_full",
+    "side": "buy",
+    "entry_price": 79500.0,
+    "exit_price": 81500.0,
+    "r_multiple": 0.0,
+    "realized_pnl": 40.0,
+    "spread_cost": 0.0,
+    "duration_sec": 0.0,
+    "reward": 10.1386,
+    "timestamp": "2026-09-09T02:06:08.493285+00:00",
+    "closed": true
   }
 ]

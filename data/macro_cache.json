@@ -1,31 +1,31 @@
 {
-  "cached_at": "2026-09-07T22:21:20.104888+00:00",
-  "expires_at": "2026-09-08T22:21:20.104888+00:00",
+  "cached_at": "2026-09-09T02:06:23.095494+00:00",
+  "expires_at": "2026-09-10T02:06:23.095494+00:00",
   "regime": "risk-off",
-  "confidence": 0.757,
-  "summary": "hawkish: Headlines lack macroeconomic substance\u2014dominated by political, legal, and corporate news with no CPI, NFP, or Fed messag; dovish: Mixed signals with modest hawkish tilt. Political uncertainty and litigation noise dominate headlines; minimal macro dat; commodity_specialist: Headlines lack commodity-specific catalysts. 'Critical Minerals' piece hints at energy transition supply constraints (su",
+  "confidence": 0.714,
+  "summary": "hawkish: CPI inflation surprise signals persistent price pressures, likely triggering hawkish Fed response and rate-hike expectat; dovish: CPI surprise to upside forces hawkish Fed pivot, reducing probability of near-term easing. Inflation remains sticky, con; commodity_specialist: Hawkish Fed pivot typically strengthens USD, pressuring XAUUSD lower, but stagflationary CPI surprise supports gold as i",
   "debates": [
     {
       "agent": "hawkish",
-      "bias": -0.15,
-      "confidence": 0.35,
-      "rationale": "Headlines lack macroeconomic substance\u2014dominated by political, legal, and corporate news with no CPI, NFP, or Fed messaging. Crypto volatility hint (XRP) and critical minerals supply-chain concern suggest ambient uncertainty. Absence of inflationary data or hawkish central bank signals prevents hawkish positioning. Lame duck politics and litigation noise create noise rather than macro clarity.",
+      "bias": 0.75,
+      "confidence": 0.72,
+      "rationale": "CPI inflation surprise signals persistent price pressures, likely triggering hawkish Fed response and rate-hike expectations. Positive bias reflects inflation-risk dominance and policy tightening implications favoring higher rates.",
       "regime_hint": "risk-off"
     },
     {
       "agent": "dovish",
-      "bias": -0.35,
-      "confidence": 0.52,
-      "rationale": "Mixed signals with modest hawkish tilt. Political uncertainty and litigation noise dominate headlines; minimal macro data. Energy transition delays and critical mineral constraints suggest structural growth headwinds. XRP/Fed timing reference hints rate expectations remain uncertain. No clear liquidity distress or yield curve signals. Absence of easing catalysts or growth collapse indicators prevents stronger dovish positioning.",
+      "bias": -0.65,
+      "confidence": 0.72,
+      "rationale": "CPI surprise to upside forces hawkish Fed pivot, reducing probability of near-term easing. Inflation remains sticky, constraining dovish case despite any growth concerns. Hawkish policy stance headwind for risk assets.",
       "regime_hint": "risk-off"
     },
     {
       "agent": "commodity_specialist",
-      "bias": 0.05,
-      "confidence": 0.35,
-      "rationale": "Headlines lack commodity-specific catalysts. 'Critical Minerals' piece hints at energy transition supply constraints (supportive for XAUUSD), but majority are political/legal noise. Energy Transfer pipeline delay is minor. No OPEC decisions, geopolitical shocks, or inventory data present. Weak signal for directional bias.",
-      "regime_hint": "risk-on"
+      "bias": 0.65,
+      "confidence": 0.72,
+      "rationale": "Hawkish Fed pivot typically strengthens USD, pressuring XAUUSD lower, but stagflationary CPI surprise supports gold as inflation hedge. Oil demand concerns from rate hikes offset by potential supply disruptions from geopolitical tension. Net positive for commodities but with elevated volatility.",
+      "regime_hint": "stagflation"
     }
   ],
-  "headlines_count": 16
+  "headlines_count": 1
 }

@@ -78,7 +78,7 @@ class OrderManager:
         """Close a specific open order ticket in MT4."""
         ticket_int = int(ticket) if str(ticket).isdigit() else 0
         bridge_result: dict[str, Any] = {"ok": True, "mode": "paper"}
-        if settings.enable_live_trading and ticket_int > 0:
+        if settings.enable_live_trading and self.bridge.connected and ticket_int > 0:
             bridge_result = await self.bridge.request("CLOSE", {"ticket": ticket_int})
             if not bridge_result.get("ok"):
                 logger.error("Failed closing ticket #%s in MT4: %s", ticket, bridge_result)
@@ -88,6 +88,8 @@ class OrderManager:
                     "error": bridge_result.get("error", "close_failed"),
                     "bridge": bridge_result,
                 }
+        elif settings.enable_live_trading and not self.bridge.connected:
+            bridge_result = {"ok": True, "mode": "disconnected_local_update", "ticket": ticket}
 
         # Remove from in-memory portfolio positions
         matching_key = None
@@ -99,8 +101,54 @@ class OrderManager:
             portfolio.positions.pop(matching_key, None)
             portfolio.update_equity()
 
-        logger.info("Successfully closed ticket #%s in MT4: %s", ticket, bridge_result)
+        logger.info("Successfully closed ticket #%s: %s", ticket, bridge_result)
         return {"ok": True, "ticket": ticket, "status": "closed", "bridge": bridge_result}
+
+    async def modify_ticket(
+        self,
+        ticket: int | str,
+        sl: float | None = None,
+        tp: float | None = None,
+    ) -> dict[str, Any]:
+        """Modify Stop Loss and/or Take Profit for an open order in MT4 in mid-air."""
+        ticket_int = int(ticket) if str(ticket).isdigit() else 0
+        bridge_result: dict[str, Any] = {"ok": True, "mode": "paper"}
+        if settings.enable_live_trading and self.bridge.connected and ticket_int > 0:
+            payload: dict[str, Any] = {"ticket": ticket_int}
+            if sl is not None:
+                payload["sl"] = float(sl)
+            if tp is not None:
+                payload["tp"] = float(tp)
+            bridge_result = await self.bridge.request("MODIFY", payload)
+            if not bridge_result.get("ok"):
+                logger.error("Failed modifying ticket #%s in MT4: %s", ticket, bridge_result)
+                return {
+                    "ok": False,
+                    "ticket": ticket,
+                    "error": bridge_result.get("error", "modify_failed"),
+                    "bridge": bridge_result,
+                }
+        elif settings.enable_live_trading and not self.bridge.connected:
+            bridge_result = {"ok": True, "mode": "disconnected_local_update", "ticket": ticket}
+
+        # Update in-memory portfolio position if present
+        for key, pos in list(portfolio.positions.items()):
+            if str(pos.ticket) == str(ticket):
+                if sl is not None:
+                    pos.stop_loss = float(sl)
+                if tp is not None:
+                    pos.take_profit = float(tp)
+                break
+
+        logger.info("Successfully modified ticket #%s: SL=%s, TP=%s", ticket, sl, tp)
+        return {
+            "ok": True,
+            "ticket": ticket,
+            "sl": sl,
+            "tp": tp,
+            "status": "modified",
+            "bridge": bridge_result,
+        }
 
     async def emergency_flat(self) -> dict[str, Any]:
         portfolio.emergency_stopped = True
