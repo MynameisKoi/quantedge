@@ -130,6 +130,48 @@ Before any order reaches the Exness broker bridge:
 - **24-Hour Persistence Cache (`macro/cache.py` & `data/asset_macro_cache.json`)**: Caches LLM outputs for 24 hours (with hourly refresh cycles) to prevent redundant API calls, slashing operational token expenses while maintaining razor-sharp macroeconomic awareness.
 - **LangSmith & Observability**: Integrated tracing for API calls via LangSmith environment configuration.
 
+### 7. Institutional UTC Market Schedule & Operational Windows
+
+QuantEdge AI adheres to a strict institutional market-hours and catalyst timetable (`macro/scheduler.py`) to maximize liquidity capture while shielding capital against illiquid spreads, rollover gaps, and high-slippage economic releases.
+
+#### A. Global Trading Sessions (UTC)
+
+| Session | Hours (UTC) | Characteristics & Strategy Behavior |
+|---|---|---|
+| **Asian / Tokyo Session** | 21:00 – 07:00 | Low-liquidity consolidation. Mean-reversion for FX is restricted to avoid Asian false breakout traps. |
+| **London Open / European Cash** | 07:00 – 13:00 | Surging liquidity. EURUSD, XAUUSD breakout and pullback strategies activate. |
+| **London / New York Overlap** | 13:00 – 17:00 | **Peak Global Liquidity**. All assets eligible for high-conviction trend and breakout execution. |
+| **New York Afternoon** | 17:00 – 21:00 | US market close flows, FOMC announcements, and daily settlement. |
+| **Daily Rollover Maintenance** | 20:59 – 22:00 | Exness MT4 server break for Gold and Oil (Mon–Thu). Trading paused to avoid wide spreads. |
+| **24/7 Continuous Crypto** | Open Always | BTCUSD trades 24/7/365, with weekend volatility shields active from Friday 21:00 to Sunday 22:00 UTC. |
+
+#### B. Per-Asset Execution Windows
+
+* **EURUSD (Euro / US Dollar)**:
+  * **Active Cash Window**: **07:00 – 17:00 UTC** (Monday – Friday).
+  * **Off-Hours Guard**: Trades outside 07:00–17:00 UTC are suppressed (`reason: "off_hours"`) to prevent getting chopped up in 5–8 pip Asian wicks.
+* **USOIL (WTI Crude Oil)**:
+  * **Peak Energy Window**: **12:00 – 18:00 UTC** (London/NY overlap & NY floor open).
+  * **EIA Inventory Catalyst**: Wednesday **14:25 UTC** (5-minute pre-release freeze).
+* **XAUUSD (Spot Gold)**:
+  * **Active Trading**: **07:00 – 20:59 UTC** (Mon–Fri).
+  * **Daily Rollover Break**: **20:59 – 22:00 UTC** (Mon–Thu) — broker spread widening pause.
+* **BTCUSD (Bitcoin)**:
+  * **Active 24/7/365**.
+  * **Weekend Shield**: Friday 21:00 UTC to Sunday 22:00 UTC. Breakout trades are blocked (`volatility_breakout` suspended) to avoid derivative exchange sweep traps; stop loss multipliers expand to $3.2\times \text{ATR}$ ($\ge \$850$ floor).
+
+#### C. Macro News Catalyst & Blackout Timetable
+
+| UTC Time | Event / Catalyst | Days | Risk Guard Action |
+|---|---|---|---|
+| **00:00 UTC** | **Midnight Learning Audit** | Daily (24/7) | Parses MT4 closed history, updates RL bandit Q-tables, and persists daily analytics. |
+| **06:30 UTC** | **Pre-London Daily Baseline** | Mon – Fri | Sets macro regime stance (`risk-on`, `risk-off`, `stagflation`) before European open. |
+| **12:25 – 12:45 UTC** | **US Tier-1 Macro Window** | Mon – Fri | **Pre-News Blackout Guard**: Freezes new orders 5 min before CPI, NFP, PPI, or GDP. |
+| **14:25 – 14:40 UTC** | **EIA Crude Oil Inventories** | Wednesdays | Freezes new USOIL orders 5 min before report; unfreezes 10 min post-release. |
+| **17:55 – 18:20 UTC** | **FOMC Rate Decision & Presser**| Wednesdays | 10-minute pre-announcement freeze; absorbs initial Fed rate reaction. |
+| **20:30 – 21:00 UTC** | **US Market Close Wrap** | Mon – Fri | Portfolio performance wrap and end-of-day equity mark. |
+| **Fri 21:00 – Sun 21:05/22:00**| **Weekend Market Closure** | Weekends | Traditional markets close. EURUSD reopens Sun 21:05 UTC; XAUUSD/USOIL reopen Sun 22:00 UTC. |
+
 ---
 
 ## Data Flow & Live vs. Backtest Decoupling
